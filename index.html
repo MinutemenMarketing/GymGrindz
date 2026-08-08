@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gym Grindz — Sports Performance Training | Coach DJ | Islip Terrace, NY</title>
+<meta name="description" content="Gym Grindz is a full performance system: speed, strength, mobility and mindset training for athletes and adults with Coach DJ (Durron Newman) in Islip Terrace, NY. Text (646) 229-8391 to start.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   GYM GRINDZ — token system
+   ============================================================ */
+:root{
+  --black:#0A0A0B;
+  --coal:#131315;
+  --coal-2:#1A1B1E;
+  --steel:#8B9099;
+  --steel-dk:#2A2C30;
+  --chalk:#F1F2ED;
+  --volt:#72E63E;
+  --volt-dim:rgba(114,230,62,.14);
+  --kelly:#2F9E44;
+  --gold:#EDC15C;
+  --font-display:'Anton', Impact, sans-serif;
+  --font-body:'Space Grotesk', system-ui, sans-serif;
+  --font-mono:'JetBrains Mono', ui-monospace, monospace;
+  --nav-h:72px;
+  --pad-x:clamp(20px,5vw,72px);
+  --sec-y:clamp(80px,12vw,150px);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+html:focus-within{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--chalk);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--volt);color:var(--black)}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--volt);outline-offset:3px;border-radius:2px}
+
+/* grit: grain overlay on the whole page */
+body::after{
+  content:"";position:fixed;inset:-50%;z-index:2000;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity:.055;animation:grain 9s steps(6) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(-4%,3%)}
+  40%{transform:translate(3%,-4%)}
+  60%{transform:translate(-3%,-3%)}
+  80%{transform:translate(4%,4%)}
+}
+
+/* type helpers */
+.display{
+  font-family:var(--font-display);
+  text-transform:uppercase;
+  line-height:.92;
+  letter-spacing:.01em;
+  font-weight:400;
+}
+.mono{
+  font-family:var(--font-mono);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--steel);
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-mono);font-size:12px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;color:var(--volt);
+  margin-bottom:22px;
+}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--volt)}
+.section{padding:var(--sec-y) var(--pad-x);position:relative}
+.wrap{max-width:1280px;margin:0 auto;position:relative}
+.sec-head{margin-bottom:clamp(40px,6vw,72px)}
+.sec-title{font-size:clamp(44px,7.5vw,104px);color:var(--chalk)}
+.sec-title .v{color:var(--volt)}
+.sec-sub{max-width:560px;color:var(--steel);font-size:17px;margin-top:20px}
+
+/* reveal-on-scroll */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}
+
+/* ============================================================
+   LOADER — plates go on the bar
+   ============================================================ */
+#loader{
+  position:fixed;inset:0;z-index:3000;background:var(--black);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  transition:opacity .6s ease,visibility .6s ease;
+}
+#loader.done{opacity:0;visibility:hidden}
+.loader-brand{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(28px,5vw,44px);letter-spacing:.06em;display:flex;gap:.14em}
+.loader-brand span{opacity:0;transform:translateY(.5em);animation:stamp .5s var(--ease-out) forwards}
+@keyframes stamp{to{opacity:1;transform:none}}
+.loader-weight{font-family:var(--font-mono);font-size:14px;letter-spacing:.2em;color:var(--volt);text-transform:uppercase;min-height:1.4em}
+.loader-bar{width:min(320px,70vw);height:3px;background:var(--steel-dk);overflow:hidden}
+.loader-bar i{display:block;height:100%;width:0%;background:var(--volt);transition:width .35s var(--ease-out)}
+
+/* ============================================================
+   CURSOR
+   ============================================================ */
+#cursor-dot,#cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:2500;border-radius:50%;display:none}
+#cursor-dot{width:6px;height:6px;background:var(--volt);transform:translate(-50%,-50%)}
+#cursor-ring{width:36px;height:36px;border:1.5px solid rgba(114,230,62,.55);transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,background .25s}
+#cursor-ring.hot{width:64px;height:64px;background:rgba(114,230,62,.08);border-color:var(--volt)}
+@media(hover:hover) and (pointer:fine){
+  body.fx #cursor-dot,body.fx #cursor-ring{display:block}
+  body.fx{cursor:none}
+  body.fx a,body.fx button{cursor:none}
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--pad-x);
+  transition:background .4s,border-color .4s,height .4s;
+  border-bottom:1px solid transparent;
+}
+#nav.scrolled{background:rgba(10,10,11,.85);backdrop-filter:blur(14px);border-color:var(--steel-dk);height:62px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-badge{width:52px;height:39px;flex:none}
+.loader-badge{width:116px;height:87px;opacity:0;animation:stamp .6s var(--ease-out) forwards}
+.logo-word{font-family:var(--font-display);font-size:19px;letter-spacing:.08em;text-transform:uppercase}
+.logo-word em{color:var(--volt);font-style:normal}
+.nav-links{display:flex;gap:34px;align-items:center;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);transition:color .25s;position:relative;padding:6px 0;white-space:nowrap}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--volt);transition:width .3s var(--ease-out)}
+.nav-links a:hover{color:var(--chalk)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{margin-left:6px}
+#burger{display:none;flex-direction:column;gap:6px;padding:10px;min-width:44px;min-height:44px;justify-content:center;align-items:center}
+#burger span{display:block;width:26px;height:2px;background:var(--chalk);transition:transform .3s,opacity .3s}
+#burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+#burger.open span:nth-child(2){opacity:0}
+#burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+#mobile-menu{
+  position:fixed;inset:0;z-index:900;background:var(--black);
+  display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad-x);gap:8px;
+  clip-path:inset(0 0 100% 0);transition:clip-path .5s var(--ease-out);
+}
+#mobile-menu.open{clip-path:inset(0 0 0% 0)}
+#mobile-menu a{font-family:var(--font-display);font-size:clamp(38px,10vw,56px);text-transform:uppercase;line-height:1.15;color:var(--chalk);display:flex;align-items:baseline;gap:14px}
+#mobile-menu a .mono{color:var(--volt)}
+#mobile-menu .mm-contact{margin-top:34px;display:flex;flex-direction:column;gap:6px}
+#mobile-menu .mm-contact a{font-family:var(--font-mono);font-size:14px;color:var(--steel);letter-spacing:.1em}
+
+/* buttons */
+.btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:18px 34px;min-height:52px;
+  transition:transform .2s var(--ease-out),background .25s,color .25s,border-color .25s;
+  will-change:transform;
+}
+.btn-volt{background:var(--volt);color:var(--black);clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
+.btn-volt:hover{background:#8FF25D}
+.btn-ghost{border:1.5px solid var(--steel-dk);color:var(--chalk)}
+.btn-ghost:hover{border-color:var(--volt);color:var(--volt)}
+.btn-sm{padding:12px 22px;min-height:44px;font-size:12px}
+.btn .arr{transition:transform .25s var(--ease-out)}
+.btn:hover .arr{transform:translateX(5px)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:calc(var(--nav-h) + 40px) var(--pad-x) 0;position:relative;overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(10,10,11,0) 40%,rgba(10,10,11,.9) 100%),
+    repeating-linear-gradient(-45deg,transparent 0 34px,rgba(255,255,255,.016) 34px 68px),
+    radial-gradient(1200px 600px at 80% -10%,rgba(114,230,62,.07),transparent 60%),
+    var(--black);
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.42;filter:grayscale(.7) contrast(1.12) brightness(.85)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.5),rgba(10,10,11,.55) 45%,var(--black) 97%)}
+.hero-watermark{
+  position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--font-display);font-size:clamp(140px,26vw,420px);text-transform:uppercase;
+  color:transparent;-webkit-text-stroke:1px rgba(139,144,153,.14);
+  white-space:nowrap;pointer-events:none;user-select:none;line-height:1;
+  will-change:transform;
+}
+.hero-inner{max-width:1280px;margin:0 auto;width:100%;position:relative;padding-bottom:clamp(48px,7vw,90px)}
+.hero-eyebrow{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:26px}
+.hero-eyebrow span{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.hero-eyebrow .live{color:var(--volt);display:inline-flex;align-items:center;gap:8px}
+.hero-eyebrow .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--volt);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+.hero-h{font-size:clamp(58px,11.5vw,176px);position:relative;z-index:2}
+.hero-h .line{display:block;overflow:hidden}
+.hero-h .line>span{display:inline-block;transform:translateY(110%);animation:rise 1s var(--ease-out) forwards}
+.hero-h .line:nth-child(2)>span{animation-delay:.12s}
+.hero-h .line:nth-child(3)>span{animation-delay:.24s}
+@keyframes rise{to{transform:none}}
+.hero-h .volt{color:var(--volt)}
+.hero-h .stroke{color:transparent;-webkit-text-stroke:2px var(--chalk)}
+.hero-sub{max-width:520px;color:var(--steel);font-size:17px;margin-top:28px;opacity:0;animation:fadeUp .9s var(--ease-out) .5s forwards}
+.hero-sub strong{color:var(--chalk);font-weight:500}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:16px;margin-top:38px;opacity:0;animation:fadeUp .9s var(--ease-out) .65s forwards}
+.hero-meta{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;
+  border-top:1px solid var(--steel-dk);margin-top:clamp(40px,6vw,64px);padding-top:22px;
+  opacity:0;animation:fadeUp .9s var(--ease-out) .8s forwards;
+}
+.stopwatch{font-family:var(--font-mono);font-size:clamp(20px,3vw,30px);font-weight:700;color:var(--chalk);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.stopwatch small{display:block;font-size:11px;font-weight:400;letter-spacing:.2em;color:var(--steel);margin-bottom:4px;text-transform:uppercase}
+.stopwatch .cs{color:var(--volt)}
+.hero-scroll{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:12px}
+.hero-scroll i{display:block;width:2px;height:34px;background:linear-gradient(var(--volt),transparent);animation:drop 1.6s infinite}
+@keyframes drop{from{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1)}to{transform:scaleY(0);transform-origin:bottom}}
+
+/* marquee tape */
+.tape{
+  background:var(--volt);color:var(--black);overflow:hidden;white-space:nowrap;
+  padding:14px 0;transform:rotate(-1.2deg) scale(1.02);position:relative;z-index:5;
+  border-top:3px solid var(--black);border-bottom:3px solid var(--black);
+}
+.tape-track{display:inline-flex;gap:0;animation:scroll 26s linear infinite;will-change:transform}
+.tape span{font-family:var(--font-display);font-size:clamp(18px,2.4vw,26px);text-transform:uppercase;letter-spacing:.05em;padding:0 26px;display:inline-flex;align-items:center;gap:26px}
+.tape span::after{content:"×";font-family:var(--font-mono);font-weight:700}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.tape.dark{background:var(--coal-2);color:var(--steel);border-color:var(--steel-dk);transform:rotate(0)}
+.tape.dark span::after{color:var(--volt)}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+#stats{background:var(--coal);border-bottom:1px solid var(--steel-dk)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--steel-dk);border:1px solid var(--steel-dk)}
+.stat{background:var(--coal);padding:clamp(28px,4vw,48px) clamp(20px,3vw,40px)}
+.stat b{font-family:var(--font-display);font-weight:400;font-size:clamp(44px,6vw,76px);line-height:1;color:var(--chalk);display:block;font-variant-numeric:tabular-nums}
+.stat b .plus{color:var(--volt)}
+.stat span{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);display:block;margin-top:12px}
+
+/* ============================================================
+   SYSTEM (pillars)
+   ============================================================ */
+#system{background:var(--black)}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pillar{
+  border:1px solid var(--steel-dk);background:var(--coal);padding:34px 26px 30px;position:relative;overflow:hidden;
+  transition:transform .35s var(--ease-out),border-color .35s;
+}
+.pillar::before{
+  content:"";position:absolute;inset:0;background:linear-gradient(160deg,var(--volt-dim),transparent 55%);
+  opacity:0;transition:opacity .35s;
+}
+.pillar:hover{transform:translateY(-6px);border-color:rgba(114,230,62,.5)}
+.pillar:hover::before{opacity:1}
+.pillar .code{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--volt)}
+.pillar h3{font-family:var(--font-display);font-weight:400;font-size:30px;text-transform:uppercase;margin:14px 0 12px;position:relative}
+.pillar p{color:var(--steel);font-size:14.5px;position:relative}
+.pillar .big{
+  position:absolute;right:-8px;bottom:-26px;font-family:var(--font-display);font-size:110px;line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(139,144,153,.16);pointer-events:none;user-select:none;
+}
+
+/* why gym grindz — real differentiators from the brand flyers */
+.why-row{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:clamp(44px,6vw,64px);border-top:1px solid var(--steel-dk);padding-top:36px}
+.why{display:flex;gap:14px;align-items:flex-start}
+.why svg{width:26px;height:26px;stroke:var(--volt);fill:none;stroke-width:1.5;flex:none;margin-top:2px}
+.why b{display:block;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);margin-bottom:4px}
+.why span{font-size:13.5px;color:var(--steel);line-height:1.55}
+.why-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:28px;text-align:center}
+
+/* seasonal program callout */
+.program-callout{
+  margin-top:clamp(40px,6vw,64px);border:1px solid rgba(114,230,62,.4);
+  background:linear-gradient(120deg,var(--volt-dim),transparent 55%);
+  padding:clamp(26px,4vw,44px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;
+}
+.program-callout .tag{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.program-callout h3{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,4.5vw,48px);text-transform:uppercase;line-height:1}
+.program-callout p{color:var(--steel);max-width:520px;font-size:14.5px;margin-top:12px}
+
+/* ============================================================
+   TRACKS (athlete / adult) + service cards
+   ============================================================ */
+.track{background:var(--coal)}
+.track.alt{background:var(--black)}
+.track-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,84px);align-items:start}
+.track-media{position:sticky;top:calc(var(--nav-h) + 24px)}
+.photo-frame{
+  position:relative;aspect-ratio:4/5;background:var(--coal-2);border:1px solid var(--steel-dk);overflow:hidden;
+}
+.photo-frame::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(180deg,rgba(10,10,11,.05) 50%,rgba(10,10,11,.55) 100%),
+    repeating-linear-gradient(-45deg,transparent 0 18px,rgba(255,255,255,.02) 18px 36px),
+    radial-gradient(600px 400px at 30% 20%,rgba(114,230,62,.08),transparent 60%);
+}
+.photo-frame .pf-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.88) contrast(1.12) brightness(.82)}
+.photo-frame .pf-tag{
+  position:absolute;top:16px;left:16px;font-family:var(--font-mono);font-size:10px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--volt);padding:6px 10px;z-index:2;
+}
+.photo-frame .pf-center{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;
+}
+.photo-frame .pf-center svg{width:44px;height:44px;stroke:var(--steel);opacity:.7}
+.photo-frame .pf-center p{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);max-width:240px;line-height:1.9}
+.photo-frame .pf-corner{position:absolute;width:22px;height:22px;border:2px solid var(--volt);z-index:2}
+.photo-frame .c1{top:10px;left:10px;border-right:0;border-bottom:0}
+.photo-frame .c2{top:10px;right:10px;border-left:0;border-bottom:0}
+.photo-frame .c3{bottom:10px;left:10px;border-right:0;border-top:0}
+.photo-frame .c4{bottom:10px;right:10px;border-left:0;border-top:0}
+.photo-frame.wide{aspect-ratio:16/10}
+.track-media .mono{margin-top:14px;display:block;line-height:1.9}
+
+.svc-list{display:flex;flex-direction:column;gap:14px}
+.svc{
+  display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+  border:1px solid var(--steel-dk);padding:22px 24px;background:transparent;
+  transition:border-color .3s,background .3s,transform .3s var(--ease-out);
+}
+.svc:hover{border-color:rgba(114,230,62,.5);background:var(--volt-dim);transform:translateX(6px)}
+.svc .code{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--volt);white-space:nowrap}
+.svc h4{font-family:var(--font-display);font-weight:400;font-size:21px;text-transform:uppercase;letter-spacing:.03em}
+.svc p{color:var(--steel);font-size:13.5px;margin-top:4px}
+.svc .arr{color:var(--steel);transition:color .3s,transform .3s var(--ease-out);font-size:18px}
+.svc:hover .arr{color:var(--volt);transform:translateX(4px)}
+
+/* parallax strip between tracks */
+.strip{
+  position:relative;overflow:hidden;padding:clamp(90px,14vw,170px) var(--pad-x);
+  background:
+    linear-gradient(rgba(10,10,11,.82),rgba(10,10,11,.82)),
+    repeating-linear-gradient(90deg,transparent 0 120px,rgba(139,144,153,.06) 120px 121px),
+    repeating-linear-gradient(0deg,transparent 0 120px,rgba(139,144,153,.06) 120px 121px),
+    var(--coal-2);
+  text-align:center;
+}
+.strip .parallax-word{
+  font-family:var(--font-display);font-size:clamp(52px,10vw,150px);text-transform:uppercase;line-height:.95;
+  will-change:transform;
+}
+.strip .parallax-word .stroke{color:transparent;-webkit-text-stroke:1.5px var(--steel)}
+.strip .parallax-word .volt{color:var(--volt)}
+.strip p{font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);margin-top:26px}
+
+/* ============================================================
+   PACKAGES
+   ============================================================ */
+#packages{background:var(--black)}
+.pkg-note{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-top:14px}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.pkg{
+  border:1px solid var(--steel-dk);background:var(--coal);padding:40px 32px;display:flex;flex-direction:column;
+  position:relative;transition:transform .35s var(--ease-out),border-color .35s;
+}
+.pkg:hover{transform:translateY(-8px);border-color:rgba(114,230,62,.5)}
+.pkg.featured{background:var(--coal-2);border-color:var(--volt)}
+.pkg .flag{
+  position:absolute;top:0;right:24px;transform:translateY(-50%);
+  font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--volt);color:var(--black);padding:6px 12px;
+}
+.pkg .code{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--volt)}
+.pkg h3{font-family:var(--font-display);font-weight:400;font-size:32px;text-transform:uppercase;margin:14px 0 6px}
+.pkg .who{color:var(--steel);font-size:14px;min-height:44px}
+.pkg .price{margin:24px 0 6px;display:flex;align-items:baseline;gap:8px}
+.pkg .price b{font-family:var(--font-display);font-weight:400;font-size:56px;line-height:1;font-variant-numeric:tabular-nums;color:var(--gold)}
+.pkg .price span{font-family:var(--font-mono);font-size:12px;color:var(--steel);letter-spacing:.1em}
+.pkg ul{list-style:none;margin:22px 0 30px;display:flex;flex-direction:column;gap:12px;flex:1}
+.pkg li{display:flex;gap:12px;font-size:14.5px;color:var(--chalk)}
+.pkg li::before{content:"→";color:var(--volt);font-family:var(--font-mono);flex:none}
+.pkg .btn{width:100%}
+
+/* ============================================================
+   RESULTS / receipts wall
+   ============================================================ */
+#results{background:var(--coal)}
+.receipts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.receipt{position:relative}
+.receipt .photo-frame{aspect-ratio:3/4}
+.receipt figcaption{display:flex;justify-content:space-between;gap:10px;margin-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.receipt figcaption b{color:var(--volt);font-weight:700}
+
+/* ============================================================
+   INSTAGRAM
+   ============================================================ */
+#instagram{background:var(--black)}
+.ig-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(36px,5vw,56px)}
+.ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.ig-tile{
+  aspect-ratio:1;background:var(--coal);border:1px solid var(--steel-dk);display:grid;place-items:center;position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s var(--ease-out);
+}
+.ig-tile::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 55%,rgba(10,10,11,.7));transition:background .3s}
+.ig-tile:hover{border-color:rgba(114,230,62,.5);transform:translateY(-4px)}
+.ig-tile .ig-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.88) contrast(1.1) brightness(.82);transition:transform .5s var(--ease-out),filter .3s}
+.ig-tile:hover .ig-img{transform:scale(1.07);filter:grayscale(.1) contrast(1.06) brightness(.95)}
+.ig-tile svg{width:26px;height:26px;stroke:var(--chalk);opacity:0;transition:opacity .3s,stroke .3s;position:relative;z-index:2}
+.ig-tile:hover svg{opacity:1;stroke:var(--volt)}
+.ig-tile span{position:absolute;bottom:10px;left:12px;font-family:var(--font-mono);font-size:9px;letter-spacing:.16em;color:var(--chalk);text-transform:uppercase;z-index:2}
+
+/* ============================================================
+   CONTACT + FORM
+   ============================================================ */
+#contact{background:var(--coal-2);border-top:1px solid var(--steel-dk)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px)}
+.contact-title{font-size:clamp(48px,7vw,96px)}
+.contact-cards{display:flex;flex-direction:column;gap:14px;margin-top:36px}
+.ccard{
+  display:flex;justify-content:space-between;align-items:center;gap:18px;
+  border:1px solid var(--steel-dk);padding:22px 24px;transition:border-color .3s,background .3s;
+}
+.ccard:hover{border-color:rgba(114,230,62,.5);background:var(--volt-dim)}
+.ccard .lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);display:block;margin-bottom:6px}
+.ccard .val{font-family:var(--font-display);font-size:clamp(19px,2.4vw,26px);text-transform:uppercase;letter-spacing:.03em}
+.ccard .arr{color:var(--volt);font-size:20px;flex:none}
+
+.form-card{border:1px solid var(--steel-dk);background:var(--coal);padding:clamp(28px,4vw,44px)}
+.form-card .mono{display:block;margin-bottom:26px;line-height:1.9}
+.form-card .mono b{color:var(--volt)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-group{margin-bottom:16px}
+.f-group label{
+  display:block;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--steel);margin-bottom:8px;
+}
+.f-group label .req{color:var(--volt)}
+.f-group input,.f-group select,.f-group textarea{
+  width:100%;background:var(--black);border:1px solid var(--steel-dk);color:var(--chalk);
+  font-family:var(--font-body);font-size:16px;padding:14px 16px;min-height:50px;
+  transition:border-color .25s;border-radius:0;appearance:none;
+}
+.f-group select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B9099' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+}
+.f-group textarea{min-height:110px;resize:vertical}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{outline:none;border-color:var(--volt)}
+.f-group .hint{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;color:var(--steel);margin-top:6px}
+.f-error{display:none;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:#FF6B5E;margin-top:6px}
+.f-group.invalid .f-error{display:block}
+.f-group.invalid input,.f-group.invalid select{border-color:#FF6B5E}
+.form-note{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--steel);margin-top:14px;line-height:1.9;text-transform:uppercase}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px var(--pad-x)}
+.foot{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+.foot .mono{line-height:1.9}
+.foot-links{display:flex;gap:24px;flex-wrap:wrap}
+.foot-links a{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);transition:color .25s}
+.foot-links a:hover{color:var(--volt)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1024px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .pillars{grid-template-columns:repeat(2,1fr)}
+  .why-row{grid-template-columns:repeat(2,1fr)}
+  .ig-grid{grid-template-columns:repeat(3,1fr)}
+  .pkg-grid{grid-template-columns:1fr;max-width:560px}
+  .track-grid{grid-template-columns:1fr}
+  .track-media{position:static;max-width:560px}
+  .contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:1100px){
+  .nav-links{display:none}
+  #burger{display:flex}
+}
+@media(max-width:760px){
+  .pillars{grid-template-columns:1fr}
+  .why-row{grid-template-columns:1fr}
+  .program-callout .btn{width:100%}
+  .receipts{grid-template-columns:1fr;max-width:420px}
+  .ig-grid{grid-template-columns:repeat(2,1fr)}
+  .f-row{grid-template-columns:1fr}
+  .svc{grid-template-columns:auto 1fr;grid-template-rows:auto auto}
+  .svc .arr{display:none}
+  .hero-meta{flex-direction:column;align-items:flex-start}
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .reveal{opacity:1;transform:none}
+  .hero-h .line>span{transform:none}
+  .hero-sub,.hero-ctas,.hero-meta{opacity:1}
+  body::after{animation:none}
+  .tape-track{animation:none}
+}
+</style>
+</head>
+<body class="fx">
+
+<!-- GG BADGE (recreation of the real Gym Grindz logo — hex badge, barbell, stars) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="gg-star" d="M0,-3 L0.9,-0.9 L3,-0.9 L1.35,0.6 L1.95,2.85 L0,1.5 L-1.95,2.85 L-1.35,0.6 L-3,-0.9 L-0.9,-0.9 Z"/>
+    <symbol id="gg-badge" viewBox="0 0 120 90">
+      <path d="M40 6 L80 6 L96 45 L80 84 L40 84 L24 45 Z" fill="#EFEDE3" stroke="#14151A" stroke-width="3"/>
+      <path d="M43.5 10.5 L76.5 10.5 L91 45 L76.5 79.5 L43.5 79.5 L29 45 Z" fill="none" stroke="#2F9E44" stroke-width="1.5"/>
+      <rect x="2" y="41.5" width="116" height="7" rx="2" fill="#161719"/>
+      <rect x="2" y="42.6" width="116" height="1.6" fill="#43474D"/>
+      <g fill="#161719" stroke="#43474D" stroke-width="1">
+        <rect x="3" y="27" width="7" height="36" rx="2"/>
+        <rect x="12" y="20" width="8" height="50" rx="2"/>
+        <rect x="21" y="13" width="9" height="64" rx="2"/>
+        <rect x="110" y="27" width="7" height="36" rx="2"/>
+        <rect x="100" y="20" width="8" height="50" rx="2"/>
+        <rect x="90" y="13" width="9" height="64" rx="2"/>
+      </g>
+      <g fill="#14151A">
+        <use href="#gg-star" x="48" y="17"/><use href="#gg-star" x="60" y="14"/><use href="#gg-star" x="72" y="17"/>
+        <use href="#gg-star" x="48" y="73"/><use href="#gg-star" x="60" y="76"/><use href="#gg-star" x="72" y="73"/>
+      </g>
+      <text x="60" y="37" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="20" fill="#2F9E44" letter-spacing="1">GYM</text>
+      <text x="60" y="68.5" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="14" fill="#2F9E44" letter-spacing="0.5">GRINDZ</text>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- LOADER -->
+<div id="loader" role="status" aria-label="Loading Gym Grindz">
+  <svg class="loader-badge" viewBox="0 0 120 90" aria-hidden="true"><use href="#gg-badge"/></svg>
+  <div class="loader-brand" aria-hidden="true">
+    <span style="animation-delay:.05s">G</span><span style="animation-delay:.1s">Y</span><span style="animation-delay:.15s">M</span><span style="animation-delay:.2s">&nbsp;</span><span style="animation-delay:.25s">G</span><span style="animation-delay:.3s">R</span><span style="animation-delay:.35s">I</span><span style="animation-delay:.4s">N</span><span style="animation-delay:.45s">D</span><span style="animation-delay:.5s">Z</span>
+  </div>
+  <div class="loader-bar"><i id="loader-fill"></i></div>
+  <div class="loader-weight" id="loader-weight">LOADING THE BAR — 45 LBS</div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header id="nav">
+  <a class="logo" href="#hero" aria-label="Gym Grindz home">
+    <svg class="logo-badge" viewBox="0 0 120 90" aria-hidden="true"><use href="#gg-badge"/></svg>
+    <span class="logo-word">GYM<em>GRINDZ</em></span>
+  </a>
+  <nav aria-label="Main">
+    <ul class="nav-links">
+      <li><a href="#system" data-magnet>The System</a></li>
+      <li><a href="#athletes" data-magnet>Athletes</a></li>
+      <li><a href="#adults" data-magnet>Adult Fitness</a></li>
+      <li><a href="#packages" data-magnet>Packages</a></li>
+      <li><a href="#results" data-magnet>Results</a></li>
+      <li class="nav-cta"><a class="btn btn-volt btn-sm" href="sms:+16462298391" data-magnet>Text Coach DJ</a></li>
+    </ul>
+  </nav>
+  <button id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE MENU -->
+<nav id="mobile-menu" aria-label="Mobile">
+  <a href="#system"><span class="mono">SYS</span>The System</a>
+  <a href="#athletes"><span class="mono">ATH</span>Athletes</a>
+  <a href="#adults"><span class="mono">FIT</span>Adult Fitness</a>
+  <a href="#packages"><span class="mono">PKG</span>Packages</a>
+  <a href="#results"><span class="mono">RES</span>Results</a>
+  <a href="#book"><span class="mono">GO</span>Book a Session</a>
+  <div class="mm-contact">
+    <a href="sms:+16462298391">TEXT (646) 229-8391</a>
+    <a href="tel:+16319040173">CALL (631) 904-0173</a>
+    <a href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener">@GYM_GRINDZ_FIT</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1600&auto=format&fit=crop" alt="">
+  </div>
+  <div class="hero-watermark" id="watermark" aria-hidden="true">GRINDZ</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="live">Now booking</span>
+      <span>The Lab · Islip Terrace, NY</span>
+      <span>Coach DJ — Durron Newman</span>
+    </div>
+    <h1 class="hero-h display">
+      <span class="line"><span>Grind <span class="stroke">now.</span></span></span>
+      <span class="line"><span>Shine on</span></span>
+      <span class="line"><span class="volt">game day.</span></span>
+    </h1>
+    <p class="hero-sub">Gym Grindz isn’t a workout. It’s a <strong>performance system</strong> — speed, strength, mobility and mindset, programmed by Coach DJ for athletes who compete and adults who refuse to coast.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-volt" href="#book" data-magnet>Start Training <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="#packages" data-magnet>Book a Session</a>
+      <a class="btn btn-ghost" href="sms:+16462298391" data-magnet>Text Coach DJ</a>
+    </div>
+    <div class="hero-meta">
+      <div class="stopwatch" aria-hidden="true">
+        <small>Session clock — always running</small>
+        <span id="sw-min">00</span>:<span id="sw-sec">00</span>.<span class="cs" id="sw-cs">00</span>
+      </div>
+      <div class="hero-scroll"><i aria-hidden="true"></i> Scroll to work</div>
+    </div>
+  </div>
+</section>
+
+<!-- TAPE -->
+<div class="tape" aria-hidden="true">
+  <div class="tape-track" id="tape1"></div>
+</div>
+
+<!-- STATS -->
+<section id="stats" class="section" aria-label="Gym Grindz by the numbers">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat reveal"><b><span class="count" data-count="4">0</span></b><span>Performance pillars in every program</span></div>
+      <div class="stat reveal reveal-d1"><b><span class="count" data-count="500">0</span><span class="plus">+</span></b><span>Sessions coached and counting</span></div>
+      <div class="stat reveal reveal-d2"><b><span class="count" data-count="12">0</span><span class="plus">+</span></b><span>Sports trained — youth to pro</span></div>
+      <div class="stat reveal reveal-d3"><b><span class="count" data-count="100">0</span><span class="plus">%</span></b><span>Effort. Every rep. No shortcuts.</span></div>
+    </div>
+    <p class="pkg-note reveal">Numbers shown are placeholders — Coach DJ’s real totals drop in here.</p>
+  </div>
+</section>
+
+<!-- SYSTEM -->
+<section id="system" class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">The Gym Grindz System</p>
+      <h2 class="sec-title display">Not workouts.<br>A <span class="v">system.</span></h2>
+      <p class="sec-sub">Every athlete and every adult at Gym Grindz trains through the same four pillars. The programming changes. The standard doesn’t.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar reveal">
+        <span class="code">PILLAR / SPD</span>
+        <h3>Speed</h3>
+        <p>Sprint mechanics, acceleration and explosive first-step power. Built in the drills, proven on the field.</p>
+        <span class="big" aria-hidden="true">01</span>
+      </article>
+      <article class="pillar reveal reveal-d1">
+        <span class="code">PILLAR / STR</span>
+        <h3>Strength</h3>
+        <p>Functional strength and conditioning that transfers — not mirror muscles, game-day horsepower.</p>
+        <span class="big" aria-hidden="true">02</span>
+      </article>
+      <article class="pillar reveal reveal-d2">
+        <span class="code">PILLAR / MOB</span>
+        <h3>Mobility</h3>
+        <p>Athletic mobility, flexibility and recovery work that keeps you durable when the season gets long.</p>
+        <span class="big" aria-hidden="true">03</span>
+      </article>
+      <article class="pillar reveal reveal-d3">
+        <span class="code">PILLAR / MND</span>
+        <h3>Mindset</h3>
+        <p>Mentorship built into every session. Discipline, accountability and confidence you carry off the floor.</p>
+        <span class="big" aria-hidden="true">04</span>
+      </article>
+    </div>
+    <div class="why-row reveal">
+      <div class="why">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4M6 8v8M21 10v4M18 8v8M6 12h12"/></svg>
+        <div><b>Private Gym</b><span>No crowds, no waiting on racks. The Lab is yours during your session.</span></div>
+      </div>
+      <div class="why">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <div><b>Expert Coaching</b><span>Every rep watched, every session programmed by Coach DJ himself.</span></div>
+      </div>
+      <div class="why">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6M14 15.5c2.8.3 5 2.2 5 4.5"/></svg>
+        <div><b>Group Motivation</b><span>Small crews that push each other — energy you can’t get training alone.</span></div>
+      </div>
+      <div class="why">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.5-7 10-7 10z"/></svg>
+        <div><b>Family Atmosphere</b><span>Youth to pro, first-timer to veteran — everybody grinds, everybody belongs.</span></div>
+      </div>
+    </div>
+    <p class="why-tag reveal">Results driven · Community focused</p>
+  </div>
+</section>
+
+<!-- ATHLETES -->
+<section id="athletes" class="section track">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Track 01 — Athlete Performance</p>
+      <h2 class="sec-title display">Built for <span class="v">game day</span></h2>
+      <p class="sec-sub"><strong style="color:var(--chalk)">Train with purpose. Perform with confidence.</strong> Sport-specific performance training for athletes of all levels and all sports — youth to professional, solo or with the whole squad.</p>
+    </div>
+    <div class="track-grid">
+      <div class="track-media reveal">
+        <div class="photo-frame">
+          <span class="pf-tag">Athlete session</span>
+          <img class="pf-img" src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=900&auto=format&fit=crop" alt="Athletes running outdoors at sunrise" loading="lazy">
+          <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
+        </div>
+        <span class="mono">Stand-in shot — swaps for Coach DJ’s actual training footage.</span>
+      </div>
+      <div class="svc-list">
+        <a class="svc reveal" href="#book"><span class="code">SPD-01</span><span><h4>Speed Development</h4><p>Acceleration, top-end speed and sprint mechanics.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">SPD-02</span><span><h4>Explosive Speed &amp; Mobility</h4><p>First-step burst paired with the range of motion to use it.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">AGL-01</span><span><h4>Agility Training</h4><p>Change of direction, footwork and reactive quickness.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">STR-01</span><span><h4>Functional Strength &amp; Conditioning</h4><p>Strength that shows up in your sport, not just the rack.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">PRF-01</span><span><h4>Sports Performance Training</h4><p>Complete athlete development, programmed to your season.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">TEM-01</span><span><h4>Team Training</h4><p>Full-squad sessions that build chemistry and standards.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">MND-01</span><span><h4>Athlete &amp; Team Mentorship</h4><p>Leadership, discipline and accountability — coached, not preached.</p></span><span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="program-callout reveal">
+      <div>
+        <span class="tag">Now enrolling — Spring &amp; Summer</span>
+        <h3>Girls Flag Football Training</h3>
+        <p>Strength &amp; conditioning, explosive speed, game-ready agility and athletic mobility for girls flag football athletes — beginner to advanced. Team, small group and 1-on-1 options.</p>
+      </div>
+      <a class="btn btn-volt" href="sms:+16462298391" data-magnet>Text Coach DJ to Sign Up <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX STRIP -->
+<div class="strip" aria-hidden="true">
+  <div class="parallax-word" id="strip-word">
+    <span class="stroke">Speed.</span> <span>Strength.</span><br>
+    <span class="volt">Mobility.</span> <span class="stroke">Mindset.</span>
+  </div>
+  <p>The four pillars — every session, every athlete, every level</p>
+</div>
+
+<!-- ADULTS -->
+<section id="adults" class="section track alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Track 02 — Adult Fitness</p>
+      <h2 class="sec-title display">Grown folks <span class="v">grind too</span></h2>
+      <p class="sec-sub"><strong style="color:var(--chalk)">Train with purpose. Move with power. Live strong.</strong> Tailored programs for adults who want real coaching, real structure and real results — in a private gym with a family atmosphere.</p>
+    </div>
+    <div class="track-grid">
+      <div class="svc-list">
+        <a class="svc reveal" href="#book"><span class="code">FIT-01</span><span><h4>Personal Training</h4><p>One-on-one sessions built entirely around your goals.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">FIT-02</span><span><h4>Small Group Fitness</h4><p>Tight crews, big energy — coaching that never gets lost in a crowd.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">FIT-03</span><span><h4>Weight Loss &amp; Muscle Toning</h4><p>Sustainable programming that changes how you look and feel.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">FIT-04</span><span><h4>Cardio &amp; Strength Training</h4><p>Conditioning and iron in the right doses for your engine.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">FIT-05</span><span><h4>Guided Workouts</h4><p>Show up. Coach DJ handles the plan, the pace and the push.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">FIT-06</span><span><h4>Tailored Programs</h4><p>Custom-built training blocks around your schedule and your life.</p></span><span class="arr">→</span></a>
+        <a class="svc reveal" href="#book"><span class="code">REC-01</span><span><h4>Flexibility &amp; Recovery</h4><p>Mobility and recovery sessions that keep you in the game.</p></span><span class="arr">→</span></a>
+      </div>
+      <div class="track-media reveal">
+        <div class="photo-frame">
+          <span class="pf-tag">Adult session</span>
+          <img class="pf-img" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=900&auto=format&fit=crop" alt="Adult client training with a barbell in the gym" loading="lazy">
+          <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
+        </div>
+        <span class="mono">Stand-in shot — swaps for Coach DJ’s actual client sessions.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAPE dark -->
+<div class="tape dark" aria-hidden="true">
+  <div class="tape-track" id="tape2"></div>
+</div>
+
+<!-- PACKAGES -->
+<section id="packages" class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Training Packages</p>
+      <h2 class="sec-title display">Pick your <span class="v">grind</span></h2>
+      <p class="sec-sub">Three ways in. Every option starts with a conversation with Coach DJ about where you are and where you’re going.</p>
+      <p class="pkg-note">Placeholder pricing — text Coach DJ for current rates.</p>
+    </div>
+    <div class="pkg-grid">
+      <article class="pkg reveal">
+        <span class="code">PKG-01</span>
+        <h3>Individual Sessions</h3>
+        <p class="who">One-on-one with Coach DJ. Try the system, feel the standard.</p>
+        <div class="price"><b>$75</b><span>/ session</span></div>
+        <ul>
+          <li>60-minute private session</li>
+          <li>Movement + goals assessment</li>
+          <li>Athlete or adult fitness focus</li>
+          <li>No commitment required</li>
+        </ul>
+        <a class="btn btn-ghost" href="#book" data-magnet>Book a Session</a>
+      </article>
+      <article class="pkg featured reveal reveal-d1">
+        <span class="flag">Best value</span>
+        <span class="code">PKG-02</span>
+        <h3>Monthly Training Package</h3>
+        <p class="who">The core Gym Grindz membership — steady work, steady results.</p>
+        <div class="price"><b>$299</b><span>/ month</span></div>
+        <ul>
+          <li>3 small-group sessions weekly</li>
+          <li>Guided workouts between sessions</li>
+          <li>Speed, strength, mobility, mindset</li>
+          <li>Progress check-ins with Coach DJ</li>
+          <li>Private gym, family atmosphere</li>
+        </ul>
+        <a class="btn btn-volt" href="#book" data-magnet>Start Training <span class="arr">→</span></a>
+      </article>
+      <article class="pkg reveal reveal-d2">
+        <span class="code">PKG-03</span>
+        <h3>In-Season / Off-Season</h3>
+        <p class="who">Athlete training blocks programmed around your season calendar.</p>
+        <div class="price"><b>$650</b><span>/ training block</span></div>
+        <ul>
+          <li>Sport-specific programming</li>
+          <li>In-season: stay fast, stay durable</li>
+          <li>Off-season: build speed &amp; strength</li>
+          <li>Team &amp; group rates available</li>
+        </ul>
+        <a class="btn btn-ghost" href="#book" data-magnet>Plan My Season</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">The Receipts Wall</p>
+      <h2 class="sec-title display">Proof over <span class="v">promises</span></h2>
+      <p class="sec-sub">Stand-in shots for now — this wall is reserved for real Gym Grindz athletes and clients: their befores, their afters, their numbers.</p>
+    </div>
+    <div class="receipts">
+      <figure class="receipt reveal">
+        <div class="photo-frame">
+          <span class="pf-tag">Slot 001</span>
+          <img class="pf-img" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=900&auto=format&fit=crop" alt="Rows of dumbbells in a dark gym" loading="lazy">
+          <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
+        </div>
+        <figcaption><span>Athlete 001</span><b>Your name here</b></figcaption>
+      </figure>
+      <figure class="receipt reveal reveal-d1">
+        <div class="photo-frame">
+          <span class="pf-tag">Slot 002</span>
+          <img class="pf-img" src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=900&auto=format&fit=crop" alt="Athlete back-squatting a barbell" loading="lazy">
+          <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
+        </div>
+        <figcaption><span>Athlete 002</span><b>Your name here</b></figcaption>
+      </figure>
+      <figure class="receipt reveal reveal-d2">
+        <div class="photo-frame">
+          <span class="pf-tag">Slot 003</span>
+          <img class="pf-img" src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=900&auto=format&fit=crop" alt="Loading weight plates onto a barbell" loading="lazy">
+          <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
+        </div>
+        <figcaption><span>Client 003</span><b>Your name here</b></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="instagram" class="section">
+  <div class="wrap">
+    <div class="ig-head reveal">
+      <div>
+        <p class="eyebrow">Follow the grind</p>
+        <h2 class="sec-title display" style="font-size:clamp(38px,5.5vw,72px)">@gym_<span class="v">grindz</span>_fit</h2>
+      </div>
+      <a class="btn btn-ghost" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" data-magnet>Follow on Instagram <span class="arr">→</span></a>
+    </div>
+    <div class="ig-grid reveal">
+      <a class="ig-tile" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" aria-label="Gym Grindz on Instagram — post slot 1"><img class="ig-img" src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=600&auto=format&fit=crop" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Post 01</span></a>
+      <a class="ig-tile" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" aria-label="Gym Grindz on Instagram — post slot 2"><img class="ig-img" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=600&auto=format&fit=crop" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Post 02</span></a>
+      <a class="ig-tile" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" aria-label="Gym Grindz on Instagram — post slot 3"><img class="ig-img" src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=600&auto=format&fit=crop" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Post 03</span></a>
+      <a class="ig-tile" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" aria-label="Gym Grindz on Instagram — post slot 4"><img class="ig-img" src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=600&auto=format&fit=crop" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Post 04</span></a>
+      <a class="ig-tile" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" aria-label="Gym Grindz on Instagram — post slot 5"><img class="ig-img" src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?q=80&w=600&auto=format&fit=crop" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Post 05</span></a>
+      <a class="ig-tile" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" aria-label="Gym Grindz on Instagram — post slot 6"><img class="ig-img" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Post 06</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT + BOOKING -->
+<section id="contact" class="section">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="eyebrow">Get in the building</p>
+        <h2 class="contact-title display">Ready<br>to <span style="color:var(--volt)">work?</span></h2>
+        <p class="sec-sub">The fastest way in is a text. Tell Coach DJ who you are and what you’re training for — he’ll take it from there.</p>
+        <div class="contact-cards">
+          <a class="ccard" href="sms:+16462298391" data-magnet>
+            <span><span class="lbl">Text / Call — Primary</span><span class="val" style="color:var(--gold)">(646) 229-8391</span></span>
+            <span class="arr" aria-hidden="true">→</span>
+          </a>
+          <a class="ccard" href="tel:+16319040173" data-magnet>
+            <span><span class="lbl">Text / Call — Second line</span><span class="val" style="color:var(--gold)">(631) 904-0173</span></span>
+            <span class="arr" aria-hidden="true">→</span>
+          </a>
+          <a class="ccard" href="https://maps.google.com/?q=42+Lowell+Ave,+Islip+Terrace,+NY+11752" target="_blank" rel="noopener" data-magnet>
+            <span><span class="lbl">The Lab — Training location</span><span class="val">42 Lowell Ave, Islip Terrace, NY</span></span>
+            <span class="arr" aria-hidden="true">→</span>
+          </a>
+          <a class="ccard" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" data-magnet>
+            <span><span class="lbl">Instagram</span><span class="val">@gym_grindz_fit</span></span>
+            <span class="arr" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="reveal reveal-d1" id="book">
+        <form class="form-card" id="book-form" novalidate>
+          <span class="mono"><b>Session request</b> — fills out a text straight to Coach DJ’s phone. Nothing stored, no spam.</span>
+          <div class="f-row">
+            <div class="f-group" id="fg-name">
+              <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+              <p class="f-error" role="alert">Add your name so Coach DJ knows who’s texting.</p>
+            </div>
+            <div class="f-group">
+              <label for="f-for">Training for</label>
+              <select id="f-for" name="for">
+                <option value="Myself (adult fitness)">Myself — adult fitness</option>
+                <option value="Myself (athlete)">Myself — athlete</option>
+                <option value="My kid (youth athlete)">My kid — youth athlete</option>
+                <option value="My team">My team</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="f-group">
+              <label for="f-svc">Interested in</label>
+              <select id="f-svc" name="service">
+                <option>Personal Training</option>
+                <option>Sports Performance Training</option>
+                <option>Speed &amp; Agility</option>
+                <option>Small Group Fitness</option>
+                <option>Team Training</option>
+                <option>Weight Loss &amp; Toning</option>
+                <option>Flexibility &amp; Recovery</option>
+                <option>Not sure yet — let’s talk</option>
+              </select>
+            </div>
+            <div class="f-group">
+              <label for="f-days">Best days</label>
+              <input id="f-days" name="days" type="text" placeholder="e.g. weekday evenings">
+            </div>
+          </div>
+          <div class="f-group">
+            <label for="f-goal">Your goal in one line</label>
+            <textarea id="f-goal" name="goal" placeholder="Faster 40. Stronger season. Down 20 lbs. Say it plain."></textarea>
+          </div>
+          <button class="btn btn-volt" type="submit" style="width:100%" data-magnet>Send it to Coach DJ <span class="arr">→</span></button>
+          <p class="form-note">Opens your messaging app with the text pre-written to (646) 229-8391 — hit send and you’re in motion.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div>
+      <a class="logo" href="#hero" aria-label="Back to top">
+        <svg class="logo-badge" viewBox="0 0 120 90" aria-hidden="true"><use href="#gg-badge"/></svg>
+        <span class="logo-word">GYM<em>GRINDZ</em></span>
+      </a>
+      <p class="mono" style="margin-top:12px">Coach DJ · Durron Newman<br>The Lab · 42 Lowell Ave, Islip Terrace, NY 11752</p>
+    </div>
+    <div class="foot-links">
+      <a href="sms:+16462298391">(646) 229-8391</a>
+      <a href="tel:+16319040173">(631) 904-0173</a>
+      <a href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener">@gym_grindz_fit</a>
+    </div>
+    <p class="mono">© <span id="year"></span> Gym Grindz.<br>Grind now. Shine on game day.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+if(reduced) document.body.classList.remove("fx");
+
+/* ---------- LOADER: plates on the bar ---------- */
+var loader = document.getElementById("loader");
+var fill = document.getElementById("loader-fill");
+var weight = document.getElementById("loader-weight");
+var plates = [45,135,225,315,405];
+function finishLoad(){
+  weight.textContent = "READY — LET’S WORK";
+  fill.style.width = "100%";
+  setTimeout(function(){ loader.classList.add("done"); }, 420);
+  setTimeout(function(){ loader.remove(); }, 1200);
+}
+if(reduced){ finishLoad(); }
+else{
+  plates.forEach(function(w,i){
+    setTimeout(function(){
+      weight.textContent = "LOADING THE BAR — " + w + " LBS";
+      fill.style.width = ((i+1)/(plates.length+1)*100) + "%";
+    }, 260*i);
+  });
+  setTimeout(finishLoad, 260*plates.length + 300);
+}
+
+/* ---------- CURSOR ---------- */
+if(finePointer && !reduced){
+  var dot = document.getElementById("cursor-dot");
+  var ring = document.getElementById("cursor-ring");
+  var mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my;
+  addEventListener("mousemove", function(e){ mx=e.clientX; my=e.clientY;
+    dot.style.transform = "translate("+(mx-3)+"px,"+(my-3)+"px)";
+  }, {passive:true});
+  (function ringLoop(){
+    rx += (mx-rx)*0.16; ry += (my-ry)*0.16;
+    ring.style.transform = "translate("+(rx-ring.offsetWidth/2)+"px,"+(ry-ring.offsetHeight/2)+"px)";
+    requestAnimationFrame(ringLoop);
+  })();
+  document.querySelectorAll("a,button,select,input,textarea").forEach(function(el){
+    el.addEventListener("mouseenter", function(){ ring.classList.add("hot"); });
+    el.addEventListener("mouseleave", function(){ ring.classList.remove("hot"); });
+  });
+}
+
+/* ---------- MAGNETIC BUTTONS ---------- */
+if(finePointer && !reduced){
+  document.querySelectorAll("[data-magnet]").forEach(function(el){
+    var strength = 0.28;
+    el.addEventListener("mousemove", function(e){
+      var r = el.getBoundingClientRect();
+      var x = e.clientX - r.left - r.width/2;
+      var y = e.clientY - r.top - r.height/2;
+      el.style.transform = "translate("+(x*strength)+"px,"+(y*strength)+"px)";
+    });
+    el.addEventListener("mouseleave", function(){ el.style.transform = ""; });
+  });
+}
+
+/* ---------- NAV ---------- */
+var nav = document.getElementById("nav");
+addEventListener("scroll", function(){ nav.classList.toggle("scrolled", scrollY > 30); }, {passive:true});
+
+var burger = document.getElementById("burger");
+var menu = document.getElementById("mobile-menu");
+burger.addEventListener("click", function(){
+  var open = menu.classList.toggle("open");
+  burger.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", open);
+  burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  document.body.style.overflow = open ? "hidden" : "";
+});
+menu.querySelectorAll("a").forEach(function(a){
+  a.addEventListener("click", function(){
+    menu.classList.remove("open"); burger.classList.remove("open");
+    burger.setAttribute("aria-expanded","false");
+    document.body.style.overflow = "";
+  });
+});
+
+/* ---------- TAPES ---------- */
+var words = ["Speed","Strength","Mobility","Mindset","Agility","Recovery","Team Training","Personal Training","Sports Performance","Adult Fitness"];
+function fillTape(id){
+  var t = document.getElementById(id);
+  if(!t) return;
+  var html = words.map(function(w){ return "<span>"+w+"</span>"; }).join("");
+  t.innerHTML = html + html; /* duplicate for seamless -50% loop */
+}
+fillTape("tape1"); fillTape("tape2");
+
+/* ---------- STOPWATCH (runs even with reduced motion — it's content, not decoration; just ticks gently) ---------- */
+(function(){
+  var t0 = performance.now();
+  var mEl=document.getElementById("sw-min"), sEl=document.getElementById("sw-sec"), cEl=document.getElementById("sw-cs");
+  function draw(){
+    var e = performance.now()-t0;
+    var m = Math.floor(e/60000), s = Math.floor(e/1000)%60, c = Math.floor(e/10)%100;
+    mEl.textContent = String(m).padStart(2,"0");
+    sEl.textContent = String(s).padStart(2,"0");
+    if(!reduced) cEl.textContent = String(c).padStart(2,"0");
+  }
+  if(reduced){ setInterval(draw, 1000); draw(); }
+  else{ (function tick(){ draw(); requestAnimationFrame(tick); })(); }
+})();
+
+/* ---------- SCROLL REVEALS ---------- */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+  });
+},{threshold:0.14, rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+
+/* ---------- COUNTERS ---------- */
+var cio = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(!en.isIntersecting) return;
+    cio.unobserve(en.target);
+    var el = en.target, target = +el.dataset.count;
+    if(reduced){ el.textContent = target; return; }
+    var start = null, dur = 1600;
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts-start)/dur, 1);
+      var eased = 1 - Math.pow(1-p, 4);
+      el.textContent = Math.round(target*eased);
+      if(p<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+},{threshold:0.6});
+document.querySelectorAll(".count").forEach(function(el){ cio.observe(el); });
+
+/* ---------- PARALLAX ---------- */
+if(!reduced){
+  var wm = document.getElementById("watermark");
+  var sw = document.getElementById("strip-word");
+  var ticking = false;
+  addEventListener("scroll", function(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var y = scrollY;
+      if(wm && y < innerHeight*1.2) wm.style.transform = "translate(-50%,-50%) translateY("+(y*0.28)+"px)";
+      if(sw){
+        var r = sw.getBoundingClientRect();
+        var prog = (innerHeight - r.top) / (innerHeight + r.height);
+        if(prog > -0.2 && prog < 1.2) sw.style.transform = "translateY("+((prog-0.5)*-70)+"px)";
+      }
+      ticking = false;
+    });
+  }, {passive:true});
+}
+
+/* ---------- BOOKING FORM → SMS ---------- */
+document.getElementById("book-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  var fgName = document.getElementById("fg-name");
+  var name = document.getElementById("f-name").value.trim();
+  if(!name){ fgName.classList.add("invalid"); document.getElementById("f-name").focus(); return; }
+  fgName.classList.remove("invalid");
+  var who = document.getElementById("f-for").value;
+  var svc = document.getElementById("f-svc").value;
+  var days = document.getElementById("f-days").value.trim();
+  var goal = document.getElementById("f-goal").value.trim();
+  var msg = "Hey Coach DJ — " + name + " here. Looking to train: " + svc + " (" + who + ").";
+  if(days) msg += " Best days: " + days + ".";
+  if(goal) msg += " Goal: " + goal;
+  msg += " Found you through the Gym Grindz site.";
+  location.href = "sms:+16462298391?&body=" + encodeURIComponent(msg);
+});
+document.getElementById("f-name").addEventListener("input", function(){
+  if(this.value.trim()) document.getElementById("fg-name").classList.remove("invalid");
+});
+
+/* ---------- YEAR ---------- */
+document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
