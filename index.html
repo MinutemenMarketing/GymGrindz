@@ -145,8 +145,19 @@ body::after{
 .logo{display:flex;align-items:center;gap:12px}
 .logo-badge{width:44px;height:44px;flex:none;object-fit:contain}
 .loader-badge{width:104px;height:104px;object-fit:contain;opacity:0;animation:stamp .6s var(--ease-out) forwards}
-.logo-word{font-family:var(--font-display);font-size:19px;letter-spacing:.08em;text-transform:uppercase}
-.logo-word em{color:var(--kelly);font-style:normal}
+.logo-word{
+  font-family:var(--font-display);font-size:20px;letter-spacing:.045em;text-transform:uppercase;
+  color:var(--kelly);
+}
+.logo-word em{color:inherit;font-style:normal}
+/* vertical sheen echoing the shaded lettering inside the badge; every stop
+   still clears 4.6:1 on the black nav, and the flat green above is the fallback */
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .logo-word{
+    background:linear-gradient(180deg,#5CBE45 0%,var(--kelly) 78%,#3A8C33 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+}
 .nav-links{display:flex;gap:34px;align-items:center;list-style:none}
 .nav-links a{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);transition:color .25s;position:relative;padding:6px 0;white-space:nowrap}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--volt);transition:width .3s var(--ease-out)}
