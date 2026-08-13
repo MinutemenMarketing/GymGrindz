@@ -13,3 +13,8 @@ desktop.ini
 
 # Logs
 *.log
+
+# Stray screenshots / image drops
+*.png
+*.jpg
+*.jpeg
