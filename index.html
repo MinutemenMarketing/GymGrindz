@@ -26,7 +26,7 @@
   --chalk:#F1F2ED;
   --volt:#72E63E;
   --volt-dim:rgba(114,230,62,.14);
-  --kelly:#2F9E44;
+  --kelly:#409838;        /* sampled from the lettering in assets/logo.png */
   --gold:#EDC15C;
   --font-display:'Anton', Impact, sans-serif;
   --font-body:'Space Grotesk', system-ui, sans-serif;
@@ -146,7 +146,7 @@ body::after{
 .logo-badge{width:44px;height:44px;flex:none;object-fit:contain}
 .loader-badge{width:104px;height:104px;object-fit:contain;opacity:0;animation:stamp .6s var(--ease-out) forwards}
 .logo-word{font-family:var(--font-display);font-size:19px;letter-spacing:.08em;text-transform:uppercase}
-.logo-word em{color:var(--volt);font-style:normal}
+.logo-word em{color:var(--kelly);font-style:normal}
 .nav-links{display:flex;gap:34px;align-items:center;list-style:none}
 .nav-links a{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);transition:color .25s;position:relative;padding:6px 0;white-space:nowrap}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--volt);transition:width .3s var(--ease-out)}
