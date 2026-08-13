@@ -179,6 +179,16 @@ body::after{
 .btn-sm{padding:12px 22px;min-height:44px;font-size:12px}
 .btn .arr{transition:transform .25s var(--ease-out)}
 .btn:hover .arr{transform:translateX(5px)}
+/* header “Text Coach DJ” only: roomier padding, black label, white on a deeper
+   green so the hover state keeps a readable contrast ratio */
+.nav-cta .btn-volt{padding:14px 30px;min-height:46px;color:var(--black);line-height:1}
+.nav-cta .btn-volt:hover{background:#1F7A32;color:#FFF}
+/* hover feedback: elements grow slightly in place — they never track the cursor */
+@media(hover:hover) and (pointer:fine){
+  .btn:hover{transform:scale(1.03)}
+  .btn:active{transform:scale(.995)}
+  .ccard:hover{transform:scale(1.02)}
+}
 
 /* ============================================================
    HERO
@@ -284,7 +294,6 @@ body::after{
 .why svg{width:26px;height:26px;stroke:var(--volt);fill:none;stroke-width:1.5;flex:none;margin-top:2px}
 .why b{display:block;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);margin-bottom:4px}
 .why span{font-size:13.5px;color:var(--steel);line-height:1.55}
-.why-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:28px;text-align:center}
 
 /* seasonal program callout */
 .program-callout{
@@ -427,7 +436,8 @@ body::after{
 .contact-cards{display:flex;flex-direction:column;gap:14px;margin-top:36px}
 .ccard{
   display:flex;justify-content:space-between;align-items:center;gap:18px;
-  border:1px solid var(--steel-dk);padding:22px 24px;transition:border-color .3s,background .3s;
+  border:1px solid var(--steel-dk);padding:22px 24px;
+  transition:border-color .3s,background .3s,transform .2s var(--ease-out);
 }
 .ccard:hover{border-color:rgba(114,230,62,.5);background:var(--volt-dim)}
 .ccard .lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);display:block;margin-bottom:6px}
@@ -565,12 +575,12 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
   </a>
   <nav aria-label="Main">
     <ul class="nav-links">
-      <li><a href="#system" data-magnet>The System</a></li>
-      <li><a href="#athletes" data-magnet>Athletes</a></li>
-      <li><a href="#adults" data-magnet>Adult Fitness</a></li>
-      <li><a href="#packages" data-magnet>Packages</a></li>
-      <li><a href="#results" data-magnet>Results</a></li>
-      <li class="nav-cta"><a class="btn btn-volt btn-sm" href="sms:+16462298391" data-magnet>Text Coach DJ</a></li>
+      <li><a href="#system">The System</a></li>
+      <li><a href="#athletes">Athletes</a></li>
+      <li><a href="#adults">Adult Fitness</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#results">Results</a></li>
+      <li class="nav-cta"><a class="btn btn-volt btn-sm" href="sms:+16462298391">Text Coach DJ</a></li>
     </ul>
   </nav>
   <button id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -614,9 +624,9 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
     </h1>
     <p class="hero-sub">Gym Grindz isn’t a workout. It’s a <strong>performance system</strong> — speed, strength, mobility and mindset, programmed by Coach DJ for athletes who compete and adults who refuse to coast.</p>
     <div class="hero-ctas">
-      <a class="btn btn-volt" href="#book" data-magnet>Start Training <span class="arr">→</span></a>
-      <a class="btn btn-ghost" href="#packages" data-magnet>Book a Session</a>
-      <a class="btn btn-ghost" href="sms:+16462298391" data-magnet>Text Coach DJ</a>
+      <a class="btn btn-volt" href="#book">Start Training <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="#packages">Book a Session</a>
+      <a class="btn btn-ghost" href="sms:+16462298391">Text Coach DJ</a>
     </div>
     <div class="hero-meta">
       <div class="stopwatch" aria-hidden="true">
@@ -698,7 +708,6 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
         <div><b>Family Atmosphere</b><span>Youth to pro, first-timer to veteran — everybody grinds, everybody belongs.</span></div>
       </div>
     </div>
-    <p class="why-tag reveal">Results driven · Community focused</p>
   </div>
 </section>
 
@@ -735,7 +744,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
         <h3>Girls Flag Football Training</h3>
         <p>Strength &amp; conditioning, explosive speed, game-ready agility and athletic mobility for girls flag football athletes — beginner to advanced. Team, small group and 1-on-1 options.</p>
       </div>
-      <a class="btn btn-volt" href="sms:+16462298391" data-magnet>Text Coach DJ to Sign Up <span class="arr">→</span></a>
+      <a class="btn btn-volt" href="sms:+16462298391">Text Coach DJ to Sign Up <span class="arr">→</span></a>
     </div>
   </div>
 </section>
@@ -805,7 +814,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
           <li>Athlete or adult fitness focus</li>
           <li>No commitment required</li>
         </ul>
-        <a class="btn btn-ghost" href="#book" data-magnet>Book a Session</a>
+        <a class="btn btn-ghost" href="#book">Book a Session</a>
       </article>
       <article class="pkg featured reveal reveal-d1">
         <span class="flag">Best value</span>
@@ -820,7 +829,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
           <li>Progress check-ins with Coach DJ</li>
           <li>Private gym, family atmosphere</li>
         </ul>
-        <a class="btn btn-volt" href="#book" data-magnet>Start Training <span class="arr">→</span></a>
+        <a class="btn btn-volt" href="#book">Start Training <span class="arr">→</span></a>
       </article>
       <article class="pkg reveal reveal-d2">
         <span class="code">PKG-03</span>
@@ -833,7 +842,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
           <li>Off-season: build speed &amp; strength</li>
           <li>Team &amp; group rates available</li>
         </ul>
-        <a class="btn btn-ghost" href="#book" data-magnet>Plan My Season</a>
+        <a class="btn btn-ghost" href="#book">Plan My Season</a>
       </article>
     </div>
   </div>
@@ -884,7 +893,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
         <p class="eyebrow">Follow the grind</p>
         <h2 class="sec-title display" style="font-size:clamp(38px,5.5vw,72px)">@gym_<span class="v">grindz</span>_fit</h2>
       </div>
-      <a class="btn btn-ghost" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" data-magnet>Follow on Instagram <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener">Follow on Instagram <span class="arr">→</span></a>
     </div>
     <div class="ig-grid reveal">
       <a class="ig-tile" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" aria-label="Gym Grindz on Instagram — post slot 1"><img class="ig-img" src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=600&auto=format&fit=crop" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Post 01</span></a>
@@ -906,19 +915,19 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
         <h2 class="contact-title display">Ready<br>to <span style="color:var(--volt)">work?</span></h2>
         <p class="sec-sub">The fastest way in is a text. Tell Coach DJ who you are and what you’re training for — he’ll take it from there.</p>
         <div class="contact-cards">
-          <a class="ccard" href="sms:+16462298391" data-magnet>
+          <a class="ccard" href="sms:+16462298391">
             <span><span class="lbl">Text / Call — Primary</span><span class="val" style="color:var(--gold)">(646) 229-8391</span></span>
             <span class="arr" aria-hidden="true">→</span>
           </a>
-          <a class="ccard" href="tel:+16319040173" data-magnet>
+          <a class="ccard" href="tel:+16319040173">
             <span><span class="lbl">Text / Call — Second line</span><span class="val" style="color:var(--gold)">(631) 904-0173</span></span>
             <span class="arr" aria-hidden="true">→</span>
           </a>
-          <a class="ccard" href="https://maps.google.com/?q=42+Lowell+Ave,+Islip+Terrace,+NY+11752" target="_blank" rel="noopener" data-magnet>
+          <a class="ccard" href="https://maps.google.com/?q=42+Lowell+Ave,+Islip+Terrace,+NY+11752" target="_blank" rel="noopener">
             <span><span class="lbl">The Lab — Training location</span><span class="val">42 Lowell Ave, Islip Terrace, NY</span></span>
             <span class="arr" aria-hidden="true">→</span>
           </a>
-          <a class="ccard" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" data-magnet>
+          <a class="ccard" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener">
             <span><span class="lbl">Instagram</span><span class="val">@gym_grindz_fit</span></span>
             <span class="arr" aria-hidden="true">→</span>
           </a>
@@ -966,7 +975,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
             <label for="f-goal">Your goal in one line</label>
             <textarea id="f-goal" name="goal" placeholder="Faster 40. Stronger season. Down 20 lbs. Say it plain."></textarea>
           </div>
-          <button class="btn btn-volt" type="submit" style="width:100%" data-magnet>Send it to Coach DJ <span class="arr">→</span></button>
+          <button class="btn btn-volt" type="submit" style="width:100%">Send it to Coach DJ <span class="arr">→</span></button>
           <p class="form-note">Opens your messaging app with the text pre-written to (646) 229-8391 — hit send and you’re in motion.</p>
         </form>
       </div>
@@ -1028,32 +1037,17 @@ else{
 if(finePointer && !reduced){
   var dot = document.getElementById("cursor-dot");
   var ring = document.getElementById("cursor-ring");
-  var mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my;
-  addEventListener("mousemove", function(e){ mx=e.clientX; my=e.clientY;
-    dot.style.transform = "translate("+(mx-3)+"px,"+(my-3)+"px)";
+  /* Both elements are written straight from the pointer position — no easing, so
+     they stay exactly on the cursor at any speed. The trailing translate(-50%,-50%)
+     keeps each one centred whatever its current size (the ring grows when hot). */
+  addEventListener("mousemove", function(e){
+    var t = "translate("+e.clientX+"px,"+e.clientY+"px) translate(-50%,-50%)";
+    dot.style.transform = t;
+    ring.style.transform = t;
   }, {passive:true});
-  (function ringLoop(){
-    rx += (mx-rx)*0.16; ry += (my-ry)*0.16;
-    ring.style.transform = "translate("+(rx-ring.offsetWidth/2)+"px,"+(ry-ring.offsetHeight/2)+"px)";
-    requestAnimationFrame(ringLoop);
-  })();
   document.querySelectorAll("a,button,select,input,textarea").forEach(function(el){
     el.addEventListener("mouseenter", function(){ ring.classList.add("hot"); });
     el.addEventListener("mouseleave", function(){ ring.classList.remove("hot"); });
-  });
-}
-
-/* ---------- MAGNETIC BUTTONS ---------- */
-if(finePointer && !reduced){
-  document.querySelectorAll("[data-magnet]").forEach(function(el){
-    var strength = 0.28;
-    el.addEventListener("mousemove", function(e){
-      var r = el.getBoundingClientRect();
-      var x = e.clientX - r.left - r.width/2;
-      var y = e.clientY - r.top - r.height/2;
-      el.style.transform = "translate("+(x*strength)+"px,"+(y*strength)+"px)";
-    });
-    el.addEventListener("mouseleave", function(){ el.style.transform = ""; });
   });
 }
 
