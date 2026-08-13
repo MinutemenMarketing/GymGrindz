@@ -258,12 +258,33 @@ body::after{
 /* ============================================================
    STATS
    ============================================================ */
-#stats{background:var(--coal);border-bottom:1px solid var(--steel-dk)}
+#stats{
+  background:
+    radial-gradient(900px 420px at 50% 0%,rgba(114,230,62,.09),transparent 68%),
+    repeating-linear-gradient(90deg,transparent 0 78px,rgba(139,144,153,.045) 78px 79px),
+    var(--black);
+  border-top:2px solid var(--volt);
+  border-bottom:1px solid var(--steel-dk);
+}
+.stats-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px 28px;margin-bottom:clamp(28px,4vw,44px)}
+.stats-head .eyebrow{margin-bottom:0}
+.stats-note{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--steel-dk);border:1px solid var(--steel-dk)}
-.stat{background:var(--coal);padding:clamp(28px,4vw,48px) clamp(20px,3vw,40px)}
-.stat b{font-family:var(--font-display);font-weight:400;font-size:clamp(44px,6vw,76px);line-height:1;color:var(--chalk);display:block;font-variant-numeric:tabular-nums}
-.stat b .plus{color:var(--volt)}
-.stat span{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);display:block;margin-top:12px}
+.stat{
+  background:var(--coal);padding:clamp(32px,4.4vw,52px) clamp(20px,3vw,40px);
+  position:relative;overflow:hidden;transition:background .35s;
+}
+/* volt rule wipes across the top on hover — the only motion in this block */
+.stat::before{content:"";position:absolute;top:0;left:0;height:3px;width:0;background:var(--volt);transition:width .55s var(--ease-out)}
+.stat:hover{background:var(--coal-2)}
+.stat:hover::before{width:100%}
+.stat b{
+  font-family:var(--font-display);font-weight:400;font-size:clamp(48px,8vw,104px);line-height:.9;
+  color:var(--volt);display:block;font-variant-numeric:tabular-nums;
+  text-shadow:0 0 34px rgba(114,230,62,.3);
+}
+.stat b .plus{color:var(--chalk)}
+.stat span{font-family:var(--font-mono);font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);display:block;margin-top:16px;line-height:1.75}
 
 /* ============================================================
    SYSTEM (pillars)
@@ -480,6 +501,10 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
 .foot-links{display:flex;gap:24px;flex-wrap:wrap}
 .foot-links a{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);transition:color .25s}
 .foot-links a:hover{color:var(--volt)}
+.foot-base{max-width:1280px;margin:30px auto 0;padding-top:22px;border-top:1px solid var(--steel-dk);text-align:center}
+.foot-by{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.foot-by a{color:var(--volt);transition:color .25s}
+.foot-by a:hover{color:var(--chalk)}
 
 /* ============================================================
    RESPONSIVE
@@ -646,13 +671,16 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
 <!-- STATS -->
 <section id="stats" class="section" aria-label="Gym Grindz by the numbers">
   <div class="wrap">
+    <div class="stats-head reveal">
+      <p class="eyebrow">The scoreboard</p>
+      <p class="stats-note">Placeholders — Coach DJ’s real totals drop in here</p>
+    </div>
     <div class="stats-grid">
       <div class="stat reveal"><b><span class="count" data-count="4">0</span></b><span>Performance pillars in every program</span></div>
       <div class="stat reveal reveal-d1"><b><span class="count" data-count="500">0</span><span class="plus">+</span></b><span>Sessions coached and counting</span></div>
       <div class="stat reveal reveal-d2"><b><span class="count" data-count="12">0</span><span class="plus">+</span></b><span>Sports trained — youth to pro</span></div>
       <div class="stat reveal reveal-d3"><b><span class="count" data-count="100">0</span><span class="plus">%</span></b><span>Effort. Every rep. No shortcuts.</span></div>
     </div>
-    <p class="pkg-note reveal">Numbers shown are placeholders — Coach DJ’s real totals drop in here.</p>
   </div>
 </section>
 
@@ -1001,6 +1029,9 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
       <a href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener">@gym_grindz_fit</a>
     </div>
     <p class="mono">© <span id="year"></span> Gym Grindz.<br>Grind now. Shine on game day.</p>
+  </div>
+  <div class="foot-base">
+    <p class="foot-by">Powered by <a href="https://minutemenmarketing.com" target="_blank" rel="noopener">Minutemen Marketing</a></p>
   </div>
 </footer>
 
