@@ -4,7 +4,7 @@ Website for **Gym Grindz** — sports performance and adult fitness training wit
 
 **Live:** https://gym-grindz.vercel.app
 
-The entire site is one self-contained `index.html`. No build step, no dependencies, no framework. Open the file in a browser and it runs.
+The site is a single `index.html` plus a small `assets/` folder for the logo and favicons. No build step, no dependencies, no framework. Open the file in a browser and it runs.
 
 ---
 
@@ -63,7 +63,9 @@ The site is live and complete, but some content is intentionally standing in unt
 
 **Photos** — twelve stock photographs from [Unsplash](https://unsplash.com) stand in for real Gym Grindz training shots: the hero background, two session frames, three transformation slots, and six Instagram tiles. Each is a single `src` swap on an `<img class="pf-img">`, `<img class="ig-img">`, or the `.hero-bg` image. Replace the URL with a real photo and update the `alt` text to describe it. The captions currently say "stand-in shot" — remove that wording once real photos are in.
 
-**Logo** — the hexagon badge is a hand-built SVG recreation of the real Gym Grindz logo, defined once as `<symbol id="gg-badge">` near the top of the file and reused in the nav, loader, and footer. Replacing the symbol's contents updates all three at once. Swapping in the original logo file is worthwhile whenever it's available.
+**Logo** — the real Gym Grindz badge lives in `assets/logo.png` (256×256, cropped to the circle with transparent corners) and is used in the nav, loader, and footer. It was cropped from an Instagram screenshot, so if the original artwork ever turns up, drop a higher-resolution version in at the same path and regenerate the favicons from it — everything else picks it up automatically.
+
+Favicons in `assets/` cover desktop and mobile: 16/32px for browser tabs, 192px for Android, and a 180px `apple-touch-icon.png` on the brand black (iOS composites icons onto an opaque background, so that one is deliberately not transparent).
 
 ---
 

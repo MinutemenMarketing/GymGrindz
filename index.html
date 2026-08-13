@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gym Grindz — Sports Performance Training | Coach DJ | Islip Terrace, NY</title>
 <meta name="description" content="Gym Grindz is a full performance system: speed, strength, mobility and mindset training for athletes and adults with Coach DJ (Durron Newman) in Islip Terrace, NY. Text (646) 229-8391 to start.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -138,8 +143,8 @@ body::after{
 }
 #nav.scrolled{background:rgba(10,10,11,.85);backdrop-filter:blur(14px);border-color:var(--steel-dk);height:62px}
 .logo{display:flex;align-items:center;gap:12px}
-.logo-badge{width:52px;height:39px;flex:none}
-.loader-badge{width:116px;height:87px;opacity:0;animation:stamp .6s var(--ease-out) forwards}
+.logo-badge{width:44px;height:44px;flex:none;object-fit:contain}
+.loader-badge{width:104px;height:104px;object-fit:contain;opacity:0;animation:stamp .6s var(--ease-out) forwards}
 .logo-word{font-family:var(--font-display);font-size:19px;letter-spacing:.08em;text-transform:uppercase}
 .logo-word em{color:var(--volt);font-style:normal}
 .nav-links{display:flex;gap:34px;align-items:center;list-style:none}
@@ -551,36 +556,9 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
 </head>
 <body class="fx">
 
-<!-- GG BADGE (recreation of the real Gym Grindz logo — hex badge, barbell, stars) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <path id="gg-star" d="M0,-3 L0.9,-0.9 L3,-0.9 L1.35,0.6 L1.95,2.85 L0,1.5 L-1.95,2.85 L-1.35,0.6 L-3,-0.9 L-0.9,-0.9 Z"/>
-    <symbol id="gg-badge" viewBox="0 0 120 90">
-      <path d="M40 6 L80 6 L96 45 L80 84 L40 84 L24 45 Z" fill="#EFEDE3" stroke="#14151A" stroke-width="3"/>
-      <path d="M43.5 10.5 L76.5 10.5 L91 45 L76.5 79.5 L43.5 79.5 L29 45 Z" fill="none" stroke="#2F9E44" stroke-width="1.5"/>
-      <rect x="2" y="41.5" width="116" height="7" rx="2" fill="#161719"/>
-      <rect x="2" y="42.6" width="116" height="1.6" fill="#43474D"/>
-      <g fill="#161719" stroke="#43474D" stroke-width="1">
-        <rect x="3" y="27" width="7" height="36" rx="2"/>
-        <rect x="12" y="20" width="8" height="50" rx="2"/>
-        <rect x="21" y="13" width="9" height="64" rx="2"/>
-        <rect x="110" y="27" width="7" height="36" rx="2"/>
-        <rect x="100" y="20" width="8" height="50" rx="2"/>
-        <rect x="90" y="13" width="9" height="64" rx="2"/>
-      </g>
-      <g fill="#14151A">
-        <use href="#gg-star" x="48" y="17"/><use href="#gg-star" x="60" y="14"/><use href="#gg-star" x="72" y="17"/>
-        <use href="#gg-star" x="48" y="73"/><use href="#gg-star" x="60" y="76"/><use href="#gg-star" x="72" y="73"/>
-      </g>
-      <text x="60" y="37" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="20" fill="#2F9E44" letter-spacing="1">GYM</text>
-      <text x="60" y="68.5" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="14" fill="#2F9E44" letter-spacing="0.5">GRINDZ</text>
-    </symbol>
-  </defs>
-</svg>
-
 <!-- LOADER -->
 <div id="loader" role="status" aria-label="Loading Gym Grindz">
-  <svg class="loader-badge" viewBox="0 0 120 90" aria-hidden="true"><use href="#gg-badge"/></svg>
+  <img class="loader-badge" src="assets/logo.png" width="256" height="256" alt="" aria-hidden="true">
   <div class="loader-brand" aria-hidden="true">
     <span style="animation-delay:.05s">G</span><span style="animation-delay:.1s">Y</span><span style="animation-delay:.15s">M</span><span style="animation-delay:.2s">&nbsp;</span><span style="animation-delay:.25s">G</span><span style="animation-delay:.3s">R</span><span style="animation-delay:.35s">I</span><span style="animation-delay:.4s">N</span><span style="animation-delay:.45s">D</span><span style="animation-delay:.5s">Z</span>
   </div>
@@ -595,7 +573,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
 <!-- NAV -->
 <header id="nav">
   <a class="logo" href="#hero" aria-label="Gym Grindz home">
-    <svg class="logo-badge" viewBox="0 0 120 90" aria-hidden="true"><use href="#gg-badge"/></svg>
+    <img class="logo-badge" src="assets/logo.png" width="256" height="256" alt="" aria-hidden="true">
     <span class="logo-word">GYM<em>GRINDZ</em></span>
   </a>
   <nav aria-label="Main">
@@ -1018,7 +996,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
   <div class="foot">
     <div>
       <a class="logo" href="#hero" aria-label="Back to top">
-        <svg class="logo-badge" viewBox="0 0 120 90" aria-hidden="true"><use href="#gg-badge"/></svg>
+        <img class="logo-badge" src="assets/logo.png" width="256" height="256" alt="" aria-hidden="true">
         <span class="logo-word">GYM<em>GRINDZ</em></span>
       </a>
       <p class="mono" style="margin-top:12px">Coach DJ · Durron Newman<br>The Lab · 42 Lowell Ave, Islip Terrace, NY 11752</p>

@@ -14,7 +14,8 @@ desktop.ini
 # Logs
 *.log
 
-# Stray screenshots / image drops
+# Stray screenshots / image drops (site assets are kept)
 *.png
 *.jpg
 *.jpeg
+!assets/**
