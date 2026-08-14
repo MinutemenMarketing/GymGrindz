@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    GYM GRINDZ — token system
@@ -142,13 +142,15 @@ body::after{
   border-bottom:1px solid transparent;
 }
 #nav.scrolled{background:rgba(10,10,11,.85);backdrop-filter:blur(14px);border-color:var(--steel-dk);height:62px}
-.logo{display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:14px}
 .logo-badge{width:44px;height:44px;flex:none;object-fit:contain}
 .loader-badge{width:104px;height:104px;object-fit:contain;opacity:0;animation:stamp .6s var(--ease-out) forwards}
 .logo-word{
-  font-family:var(--font-display);font-size:20px;letter-spacing:.045em;text-transform:uppercase;
-  color:var(--kelly);
+  font-family:'Archivo',var(--font-body),sans-serif;font-weight:800;
+  font-size:clamp(15px,1.35vw,18px);letter-spacing:.135em;text-transform:uppercase;
+  white-space:nowrap;line-height:1;color:var(--kelly);
 }
+.logo-word em{margin-left:.18em}
 .logo-word em{color:inherit;font-style:normal}
 /* vertical sheen echoing the shaded lettering inside the badge; every stop
    still clears 4.6:1 on the black nav, and the flat green above is the fallback */
@@ -272,35 +274,21 @@ body::after{
 .tape.dark span::after{color:var(--volt)}
 
 /* ============================================================
-   STATS
+   ABOUT DJ
    ============================================================ */
-#stats{
-  background:
-    radial-gradient(900px 420px at 50% 0%,rgba(114,230,62,.09),transparent 68%),
-    repeating-linear-gradient(90deg,transparent 0 78px,rgba(139,144,153,.045) 78px 79px),
-    var(--black);
-  border-top:2px solid var(--volt);
-  border-bottom:1px solid var(--steel-dk);
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,72px);align-items:start}
+.about-media{display:grid;gap:18px}
+/* the profile card is an infographic — no scrim, no grade, so its text stays legible */
+.photo-frame.is-graphic::before{display:none}
+.photo-frame.is-graphic .pf-img{filter:none}
+.about-cols{display:grid;gap:28px}
+.about-col h3{
+  font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--volt);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--steel-dk);
 }
-.stats-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px 28px;margin-bottom:clamp(28px,4vw,44px)}
-.stats-head .eyebrow{margin-bottom:0}
-.stats-note{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--steel-dk);border:1px solid var(--steel-dk)}
-.stat{
-  background:var(--coal);padding:clamp(32px,4.4vw,52px) clamp(20px,3vw,40px);
-  position:relative;overflow:hidden;transition:background .35s;
-}
-/* volt rule wipes across the top on hover — the only motion in this block */
-.stat::before{content:"";position:absolute;top:0;left:0;height:3px;width:0;background:var(--volt);transition:width .55s var(--ease-out)}
-.stat:hover{background:var(--coal-2)}
-.stat:hover::before{width:100%}
-.stat b{
-  font-family:var(--font-display);font-weight:400;font-size:clamp(48px,8vw,104px);line-height:.9;
-  color:var(--volt);display:block;font-variant-numeric:tabular-nums;
-  text-shadow:0 0 34px rgba(114,230,62,.3);
-}
-.stat b .plus{color:var(--chalk)}
-.stat span{font-family:var(--font-mono);font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);display:block;margin-top:16px;line-height:1.75}
+.about-col ul{list-style:none;display:grid;gap:9px}
+.about-col li{display:flex;gap:11px;font-size:14.5px;color:var(--chalk);line-height:1.5}
+.about-col li::before{content:"";width:5px;height:5px;background:var(--volt);flex:none;margin-top:7px}
 
 /* ============================================================
    SYSTEM (pillars)
@@ -332,15 +320,6 @@ body::after{
 .why b{display:block;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);margin-bottom:4px}
 .why span{font-size:13.5px;color:var(--steel);line-height:1.55}
 
-/* seasonal program callout */
-.program-callout{
-  margin-top:clamp(40px,6vw,64px);border:1px solid rgba(114,230,62,.4);
-  background:linear-gradient(120deg,var(--volt-dim),transparent 55%);
-  padding:clamp(26px,4vw,44px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;
-}
-.program-callout .tag{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
-.program-callout h3{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,4.5vw,48px);text-transform:uppercase;line-height:1}
-.program-callout p{color:var(--steel);max-width:520px;font-size:14.5px;margin-top:12px}
 
 /* ============================================================
    TRACKS (athlete / adult) + service cards
@@ -443,7 +422,12 @@ body::after{
 #results{background:var(--coal)}
 .receipts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .receipt{position:relative}
-.receipt .photo-frame{aspect-ratio:3/4}
+/* proof posts are square-format Instagram posts — square frames keep them uncropped */
+.receipt .photo-frame{aspect-ratio:1/1}
+.photo-frame.is-proof::before{background:linear-gradient(180deg,rgba(10,10,11,0) 72%,rgba(10,10,11,.4))}
+.photo-frame.is-proof .pf-img{filter:grayscale(.08) contrast(1.02) brightness(.96)}
+a.photo-frame.is-proof:hover .pf-img{filter:none}
+.photo-frame.is-proof .pf-img.top{object-position:top}
 .receipt figcaption{display:flex;justify-content:space-between;gap:10px;margin-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
 .receipt figcaption b{color:var(--volt);font-weight:700}
 
@@ -452,7 +436,7 @@ body::after{
    ============================================================ */
 #instagram{background:var(--black)}
 .ig-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(36px,5vw,56px)}
-.ig-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.ig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .ig-tile{
   aspect-ratio:9/16;background:var(--coal);border:1px solid var(--steel-dk);display:grid;place-items:center;position:relative;overflow:hidden;
   transition:border-color .3s,transform .3s var(--ease-out);
@@ -464,18 +448,13 @@ body::after{
 .ig-tile .ig-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.05) brightness(.88);transition:transform .5s var(--ease-out),filter .3s}
 .ig-tile:hover .ig-img{transform:scale(1.06);filter:grayscale(0) contrast(1.03) brightness(1)}
 
-/* play affordance for reels, shared by the grid tiles and the featured frames */
-.ig-play,.pf-play{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;
-  width:50px;height:50px;border-radius:50%;display:grid;place-items:center;
-  background:rgba(10,10,11,.55);border:1.5px solid rgba(114,230,62,.8);
-  transition:background .3s,transform .3s var(--ease-out);
+/* small reel marker in the corner — no play overlay, nothing to click through */
+.ig-reel,.pf-reel{
+  position:absolute;top:11px;right:11px;z-index:3;width:21px;height:21px;
+  opacity:.92;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7));pointer-events:none;
 }
-.ig-play svg,.pf-play svg{width:16px;height:16px;fill:var(--volt);margin-left:3px;transition:fill .3s}
-.pf-play{width:64px;height:64px}
-.pf-play svg{width:21px;height:21px}
-.ig-tile:hover .ig-play,a.photo-frame:hover .pf-play{background:var(--volt);transform:translate(-50%,-50%) scale(1.07)}
-.ig-tile:hover .ig-play svg,a.photo-frame:hover .pf-play svg{fill:var(--black)}
+.pf-reel{top:14px;right:14px;width:24px;height:24px}
+.ig-reel svg,.pf-reel svg{width:100%;height:100%;fill:none;stroke:#fff;stroke-width:1.6;stroke-linejoin:round}
 /* featured reel frames in the two training sections */
 a.photo-frame .pf-img{filter:grayscale(.15) contrast(1.04) brightness(.92);transition:transform .5s var(--ease-out),filter .3s}
 a.photo-frame:hover .pf-img{transform:scale(1.035);filter:grayscale(0) contrast(1.02) brightness(1)}
@@ -546,23 +525,24 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
    RESPONSIVE
    ============================================================ */
 @media(max-width:1024px){
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
   .pillars{grid-template-columns:repeat(2,1fr)}
   .why-row{grid-template-columns:repeat(2,1fr)}
   .ig-grid{grid-template-columns:repeat(3,1fr)}
   .pkg-grid{grid-template-columns:1fr;max-width:560px}
   .track-grid{grid-template-columns:1fr}
   .track-media{position:static;max-width:560px}
+  .about-grid{grid-template-columns:1fr}
+  .about-media{grid-template-columns:1fr 1fr;max-width:100%}
   .contact-grid{grid-template-columns:1fr}
 }
-@media(max-width:1100px){
+@media(max-width:1200px){
   .nav-links{display:none}
   #burger{display:flex}
 }
 @media(max-width:760px){
   .pillars{grid-template-columns:1fr}
   .why-row{grid-template-columns:1fr}
-  .program-callout .btn{width:100%}
+  .about-media{grid-template-columns:1fr}
   .receipts{grid-template-columns:1fr;max-width:420px}
   .ig-grid{grid-template-columns:repeat(2,1fr)}
   .f-row{grid-template-columns:1fr}
@@ -605,10 +585,11 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
 <header id="nav">
   <a class="logo" href="#hero" aria-label="Gym Grindz home">
     <img class="logo-badge" src="assets/logo.png" width="256" height="256" alt="" aria-hidden="true">
-    <span class="logo-word">GYM<em>GRINDZ</em></span>
+    <span class="logo-word">GYM <em>GRINDZ</em></span>
   </a>
   <nav aria-label="Main">
     <ul class="nav-links">
+      <li><a href="#about">About DJ</a></li>
       <li><a href="#system">The System</a></li>
       <li><a href="#athletes">Athletes</a></li>
       <li><a href="#adults">Adult Fitness</a></li>
@@ -624,6 +605,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
 
 <!-- MOBILE MENU -->
 <nav id="mobile-menu" aria-label="Mobile">
+  <a href="#about"><span class="mono">DJ</span>About DJ</a>
   <a href="#system"><span class="mono">SYS</span>The System</a>
   <a href="#athletes"><span class="mono">ATH</span>Athletes</a>
   <a href="#adults"><span class="mono">FIT</span>Adult Fitness</a>
@@ -677,18 +659,59 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
   <div class="tape-track" id="tape1"></div>
 </div>
 
-<!-- STATS -->
-<section id="stats" class="section" aria-label="Gym Grindz by the numbers">
+<!-- ABOUT DJ -->
+<section id="about" class="section track">
   <div class="wrap">
-    <div class="stats-head reveal">
-      <p class="eyebrow">The scoreboard</p>
-      <p class="stats-note">Placeholders — Coach DJ’s real totals drop in here</p>
+    <div class="sec-head reveal">
+      <p class="eyebrow">Meet the coach</p>
+      <h2 class="sec-title display">Coach <span class="v">DJ</span></h2>
+      <p class="sec-sub">Durron Newman — owner and trainer of Gym Grindz. A former student-athlete in track &amp; field and football, now coaching athletes and adults out of The Lab in Islip Terrace. <strong style="color:var(--chalk)">We grind, so you can shine.</strong></p>
     </div>
-    <div class="stats-grid">
-      <div class="stat reveal"><b><span class="count" data-count="4">0</span></b><span>Performance pillars in every program</span></div>
-      <div class="stat reveal reveal-d1"><b><span class="count" data-count="500">0</span><span class="plus">+</span></b><span>Sessions coached and counting</span></div>
-      <div class="stat reveal reveal-d2"><b><span class="count" data-count="12">0</span><span class="plus">+</span></b><span>Sports trained — youth to pro</span></div>
-      <div class="stat reveal reveal-d3"><b><span class="count" data-count="100">0</span><span class="plus">%</span></b><span>Effort. Every rep. No shortcuts.</span></div>
+    <div class="about-grid">
+      <div class="about-media reveal">
+        <a class="photo-frame is-graphic" style="aspect-ratio:760/766" href="https://www.instagram.com/p/DZnzkizRb3W/" target="_blank" rel="noopener" aria-label="Coach DJ’s profile card on Instagram — opens in a new tab">
+          <img class="pf-img" src="assets/ig/DZnzkizRb3W.jpg" width="760" height="766" alt="Coach DJ profile card listing his background, education and certifications" loading="lazy">
+          <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
+        </a>
+        <a class="photo-frame" style="aspect-ratio:4/5" href="https://www.instagram.com/p/DbmEcfLEWlh/?img_index=1" target="_blank" rel="noopener" aria-label="Track days on Instagram — opens in a new tab">
+          <span class="pf-tag">Track days</span>
+          <img class="pf-img" src="assets/ig/DbmEcfLEWlh-about.jpg" width="560" height="700" alt="Sprinter carrying a relay baton down the track in a Kenyan Runners singlet" loading="lazy">
+          <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
+        </a>
+      </div>
+      <div class="about-cols">
+        <div class="about-col reveal">
+          <h3>Background</h3>
+          <ul>
+            <li>Former student-athlete — track &amp; field and football</li>
+            <li>Kenyan Runners Track Club</li>
+            <li>Cardinal Hayes High School</li>
+            <li>St. John’s University</li>
+          </ul>
+        </div>
+        <div class="about-col reveal reveal-d1">
+          <h3>Education</h3>
+          <ul>
+            <li>Bachelor’s in Sports Management, minor in Psychology</li>
+            <li>MS in Education — Rehabilitation Counseling</li>
+            <li>Doctorate in Sports Leadership, Concordia University — in progress</li>
+          </ul>
+        </div>
+        <div class="about-col reveal reveal-d2">
+          <h3>Certifications</h3>
+          <ul>
+            <li>Certified Personal Trainer</li>
+            <li>Certified Speed, Agility &amp; Quickness Trainer</li>
+            <li>Certified Mobility Specialist</li>
+            <li>Certified Metabolic Conditioning Coach</li>
+            <li>Certified Level 1 TRX Instructor</li>
+            <li>Certified Level 1 Landmine Trainer</li>
+            <li>CPR, First Aid / AED</li>
+            <li>Green Dot Bystander Intervention Trainer</li>
+            <li>Certified Academic Advisor</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -762,7 +785,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
           <span class="pf-tag">Athlete session</span>
           <img class="pf-img" src="assets/ig/DbswmqCRadv-feature.jpg" width="640" height="800" alt="Athlete in a Stony Brook Football shirt training with a kettlebell at The Lab, in front of the athlete signature wall" loading="lazy">
           <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
-          <span class="pf-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="pf-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
         </a>
         <span class="mono">Real session at The Lab — watch it on <a href="https://www.instagram.com/reel/DbswmqCRadv/" target="_blank" rel="noopener">Instagram</a>.</span>
       </div>
@@ -775,14 +798,6 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
         <a class="svc reveal" href="#book"><span class="code">TEM-01</span><span><h4>Team Training</h4><p>Full-squad sessions that build chemistry and standards.</p></span><span class="arr">→</span></a>
         <a class="svc reveal" href="#book"><span class="code">MND-01</span><span><h4>Athlete &amp; Team Mentorship</h4><p>Leadership, discipline and accountability — coached, not preached.</p></span><span class="arr">→</span></a>
       </div>
-    </div>
-    <div class="program-callout reveal">
-      <div>
-        <span class="tag">Now enrolling — Spring &amp; Summer</span>
-        <h3>Girls Flag Football Training</h3>
-        <p>Strength &amp; conditioning, explosive speed, game-ready agility and athletic mobility for girls flag football athletes — beginner to advanced. Team, small group and 1-on-1 options.</p>
-      </div>
-      <a class="btn btn-volt" href="sms:+16462298391">Text Coach DJ to Sign Up <span class="arr">→</span></a>
     </div>
   </div>
 </section>
@@ -815,13 +830,13 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
         <a class="svc reveal" href="#book"><span class="code">REC-01</span><span><h4>Flexibility &amp; Recovery</h4><p>Mobility and recovery sessions that keep you in the game.</p></span><span class="arr">→</span></a>
       </div>
       <div class="track-media reveal">
-        <a class="photo-frame" href="https://www.instagram.com/reel/DbQwWOsR9Kv/" target="_blank" rel="noopener" aria-label="Watch this strength session on Instagram — opens in a new tab">
-          <span class="pf-tag">Strength session</span>
-          <img class="pf-img" src="assets/ig/DbQwWOsR9Kv-feature.jpg" width="640" height="800" alt="Barbell split squat in the rack during a Gym Grindz strength session" loading="lazy">
+        <a class="photo-frame" href="https://www.instagram.com/reel/DacnexQRBcF/" target="_blank" rel="noopener" aria-label="Watch this adult fitness session on Instagram — opens in a new tab">
+          <span class="pf-tag">Adult session</span>
+          <img class="pf-img" src="assets/ig/DacnexQRBcF-feature.jpg" width="640" height="800" alt="Adult fitness session at The Lab" loading="lazy">
           <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
-          <span class="pf-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="pf-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
         </a>
-        <span class="mono">Real session at The Lab — watch it on <a href="https://www.instagram.com/reel/DbQwWOsR9Kv/" target="_blank" rel="noopener">Instagram</a>.</span>
+        <span class="mono">Real session at The Lab — watch it on <a href="https://www.instagram.com/reel/DacnexQRBcF/" target="_blank" rel="noopener">Instagram</a>.</span>
       </div>
     </div>
   </div>
@@ -893,32 +908,29 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
     <div class="sec-head reveal">
       <p class="eyebrow">The Receipts Wall</p>
       <h2 class="sec-title display">Proof over <span class="v">promises</span></h2>
-      <p class="sec-sub">Stand-in shots for now — this wall is reserved for real Gym Grindz athletes and clients: their befores, their afters, their numbers.</p>
+      <p class="sec-sub">Straight from <a href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener" style="color:var(--volt)">@gym_grindz_fit</a> — real athletes, real numbers, posted as they happened.</p>
     </div>
     <div class="receipts">
       <figure class="receipt reveal">
-        <div class="photo-frame">
-          <span class="pf-tag">Slot 001</span>
-          <img class="pf-img" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=900&auto=format&fit=crop" alt="Rows of dumbbells in a dark gym" loading="lazy">
+        <a class="photo-frame is-proof" href="https://www.instagram.com/p/DbTRgjuRaqZ/" target="_blank" rel="noopener" aria-label="Before and now progress post on Instagram — opens in a new tab">
+          <img class="pf-img" src="assets/ig/DbTRgjuRaqZ.jpg" width="760" height="760" alt="Side-by-side before and now progress photos of a Gym Grindz client" loading="lazy">
           <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
-        </div>
-        <figcaption><span>Athlete 001</span><b>Your name here</b></figcaption>
+        </a>
+        <figcaption><span>Before / now</span><b>View post</b></figcaption>
       </figure>
       <figure class="receipt reveal reveal-d1">
-        <div class="photo-frame">
-          <span class="pf-tag">Slot 002</span>
-          <img class="pf-img" src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=900&auto=format&fit=crop" alt="Athlete back-squatting a barbell" loading="lazy">
+        <a class="photo-frame is-proof" href="https://www.instagram.com/p/DYhmLhUR56V/" target="_blank" rel="noopener" aria-label="Baseball season stat card on Instagram — opens in a new tab">
+          <img class="pf-img" src="assets/ig/DYhmLhUR56V.jpg" width="760" height="760" alt="Baseball stat card showing a Gym Grindz athlete’s pitching and hitting numbers" loading="lazy">
           <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
-        </div>
-        <figcaption><span>Athlete 002</span><b>Your name here</b></figcaption>
+        </a>
+        <figcaption><span>Season numbers</span><b>View post</b></figcaption>
       </figure>
       <figure class="receipt reveal reveal-d2">
-        <div class="photo-frame">
-          <span class="pf-tag">Slot 003</span>
-          <img class="pf-img" src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=900&auto=format&fit=crop" alt="Loading weight plates onto a barbell" loading="lazy">
+        <a class="photo-frame is-proof" href="https://www.instagram.com/p/DJw34iHvCRz/" target="_blank" rel="noopener" aria-label="High school spring season highlight on Instagram — opens in a new tab">
+          <img class="pf-img top" src="assets/ig/DJw34iHvCRz.jpg" width="760" height="760" alt="High school spring season 2025 highlight reel for a Gym Grindz athlete" loading="lazy">
           <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
-        </div>
-        <figcaption><span>Client 003</span><b>Your name here</b></figcaption>
+        </a>
+        <figcaption><span>Season highlights</span><b>View post</b></figcaption>
       </figure>
     </div>
   </div>
@@ -935,29 +947,40 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
       <a class="btn btn-ghost" href="https://instagram.com/gym_grindz_fit" target="_blank" rel="noopener">Follow on Instagram <span class="arr">→</span></a>
     </div>
     <div class="ig-grid reveal">
-      <a class="ig-tile" href="https://www.instagram.com/reel/DbswmqCRadv/" target="_blank" rel="noopener" aria-label="Reel: kettlebell work at The Lab — opens Instagram in a new tab">
-        <img class="ig-img" src="assets/ig/DbswmqCRadv.jpg" width="360" height="640" alt="Athlete in a Stony Brook Football shirt training with a kettlebell at The Lab" loading="lazy">
-        <span class="ig-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        <span>Kettlebell work</span>
-      </a>
       <a class="ig-tile" href="https://www.instagram.com/reel/DaX4iVSxW9c/" target="_blank" rel="noopener" aria-label="Reel: track speed work — opens Instagram in a new tab">
         <img class="ig-img" src="assets/ig/DaX4iVSxW9c.jpg" width="360" height="640" alt="Athletes running sprint repeats on an outdoor track at dusk" loading="lazy">
-        <span class="ig-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
         <span>Track speed work</span>
       </a>
       <a class="ig-tile" href="https://www.instagram.com/reel/DbQwWOsR9Kv/" target="_blank" rel="noopener" aria-label="Reel: barbell split squats — opens Instagram in a new tab">
         <img class="ig-img" src="assets/ig/DbQwWOsR9Kv.jpg" width="360" height="640" alt="Barbell split squat in the rack during a strength session" loading="lazy">
-        <span class="ig-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
         <span>Split squats</span>
+      </a>
+      <a class="ig-tile" href="https://www.instagram.com/reel/DWucxZukcLT/" target="_blank" rel="noopener" aria-label="Reel from Gym Grindz — opens Instagram in a new tab">
+        <img class="ig-img" src="assets/ig/DWucxZukcLT.jpg" width="360" height="640" alt="Training reel from Gym Grindz" loading="lazy">
+        <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
+        <span>In the lab</span>
+      </a>
+      <a class="ig-tile" href="https://www.instagram.com/reel/DZH9qz7xafp/" target="_blank" rel="noopener" aria-label="Reel from Gym Grindz — opens Instagram in a new tab">
+        <img class="ig-img" src="assets/ig/DZH9qz7xafp.jpg" width="360" height="640" alt="Training reel from Gym Grindz" loading="lazy">
+        <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
+        <span>Session work</span>
+      </a>
+      <a class="ig-tile" href="https://www.instagram.com/reel/DbgQ1AfR8ZC/" target="_blank" rel="noopener" aria-label="Reel from Gym Grindz — opens Instagram in a new tab">
+        <img class="ig-img" src="assets/ig/DbgQ1AfR8ZC.jpg" width="360" height="640" alt="Training reel from Gym Grindz" loading="lazy">
+        <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
+        <span>On the floor</span>
+      </a>
+      <a class="ig-tile" href="https://www.instagram.com/reel/DbyOsUeRPZB/" target="_blank" rel="noopener" aria-label="Reel from Gym Grindz — opens Instagram in a new tab">
+        <img class="ig-img" src="assets/ig/DbyOsUeRPZB.jpg" width="360" height="640" alt="Training reel from Gym Grindz" loading="lazy">
+        <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
+        <span>Reps in</span>
       </a>
       <a class="ig-tile" href="https://www.instagram.com/reel/DZxaQF-RSEw/" target="_blank" rel="noopener" aria-label="Reel: Long Island Black-owned businesses, Juneteenth — opens Instagram in a new tab">
         <img class="ig-img" src="assets/ig/DZxaQF-RSEw.jpg" width="360" height="640" alt="Training in the gym with an overlay reading Long Island, let’s build the ultimate list of Black-owned businesses, Happy Juneteenth" loading="lazy">
-        <span class="ig-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8.5h18M8.6 3l3.4 5.5M15.1 3l3.4 5.5"/></svg></span>
         <span>Juneteenth</span>
-      </a>
-      <a class="ig-tile" href="https://www.instagram.com/p/DbmEcfLEWlh/?img_index=1" target="_blank" rel="noopener" aria-label="Photo: relay sprint on the track — opens Instagram in a new tab">
-        <img class="ig-img" src="assets/ig/DbmEcfLEWlh.jpg" width="360" height="640" alt="Sprinter carrying a relay baton down the track in a green singlet" loading="lazy">
-        <span>On the track</span>
       </a>
     </div>
   </div>
@@ -1048,7 +1071,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
     <div>
       <a class="logo" href="#hero" aria-label="Back to top">
         <img class="logo-badge" src="assets/logo.png" width="256" height="256" alt="" aria-hidden="true">
-        <span class="logo-word">GYM<em>GRINDZ</em></span>
+        <span class="logo-word">GYM <em>GRINDZ</em></span>
       </a>
       <p class="mono" style="margin-top:12px">Coach DJ · Durron Newman<br>The Lab · 42 Lowell Ave, Islip Terrace, NY 11752</p>
     </div>
