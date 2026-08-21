@@ -4,7 +4,7 @@ Website for **Gym Grindz** — sports performance and adult fitness training wit
 
 **Live:** https://gym-grindz.vercel.app
 
-The site is a single `index.html` plus a small `assets/` folder for the logo and favicons. No build step, no dependencies, no framework. Open the file in a browser and it runs.
+The site is a single `index.html` plus an `assets/` folder holding the logo, favicons, and the Instagram reel videos and posters. No build step, no dependencies, no framework. Open the file in a browser and it runs.
 
 ---
 
