@@ -276,12 +276,15 @@ body::after{
 /* ============================================================
    ABOUT DJ
    ============================================================ */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,72px);align-items:start}
-.about-media{display:grid;gap:18px}
+/* Rows sized to their own content. Side by side, the media stack ran roughly
+   500px taller than the credentials beside it, leaving that much dead column. */
+.about-grid{display:grid;gap:clamp(30px,4vw,52px)}
+.about-media{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.about-media .photo-frame{aspect-ratio:1/1}   /* equal squares keep the row flush */
 /* the profile card is an infographic — no scrim, no grade, so its text stays legible */
 .photo-frame.is-graphic::before{display:none}
 .photo-frame.is-graphic .pf-img{filter:none}
-.about-cols{display:grid;gap:28px}
+.about-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3vw,38px);align-items:start}
 .about-col h3{
   font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
   color:var(--volt);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--steel-dk);
@@ -332,14 +335,14 @@ body::after{
   display:block;position:relative;aspect-ratio:4/5;background:var(--coal-2);border:1px solid var(--steel-dk);overflow:hidden;
   transition:border-color .3s;
 }
+/* Neutral scrim only — just enough to keep the corner label readable. No colour
+   wash: a green radial tint and a grey stripe layer used to sit over the media. */
 .photo-frame::before{
-  content:"";position:absolute;inset:0;z-index:1;
-  background:
-    linear-gradient(180deg,rgba(10,10,11,.05) 50%,rgba(10,10,11,.55) 100%),
-    repeating-linear-gradient(-45deg,transparent 0 18px,rgba(255,255,255,.02) 18px 36px),
-    radial-gradient(600px 400px at 30% 20%,rgba(114,230,62,.08),transparent 60%);
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,10,11,0) 68%,rgba(10,10,11,.5));
 }
-.photo-frame .pf-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.88) contrast(1.12) brightness(.82)}
+/* media renders in its own colours — no grade applied to photos or video */
+.photo-frame .pf-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .photo-frame .pf-tag{
   position:absolute;top:16px;left:16px;font-family:var(--font-mono);font-size:10px;font-weight:700;
   letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--volt);padding:6px 10px;z-index:2;
@@ -425,8 +428,6 @@ body::after{
 /* proof posts are square-format Instagram posts — square frames keep them uncropped */
 .receipt .photo-frame{aspect-ratio:1/1}
 .photo-frame.is-proof::before{background:linear-gradient(180deg,rgba(10,10,11,0) 72%,rgba(10,10,11,.4))}
-.photo-frame.is-proof .pf-img{filter:grayscale(.08) contrast(1.02) brightness(.96)}
-a.photo-frame.is-proof:hover .pf-img{filter:none}
 .photo-frame.is-proof .pf-img.top{object-position:top}
 .receipt figcaption{display:flex;justify-content:space-between;gap:10px;margin-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
 .receipt figcaption b{color:var(--volt);font-weight:700}
@@ -441,12 +442,12 @@ a.photo-frame.is-proof:hover .pf-img{filter:none}
   aspect-ratio:9/16;background:var(--coal);border:1px solid var(--steel-dk);display:grid;place-items:center;position:relative;overflow:hidden;
   transition:border-color .3s,transform .3s var(--ease-out);
 }
-.ig-tile::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 55%,rgba(10,10,11,.7));transition:background .3s}
+.ig-tile::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent 64%,rgba(10,10,11,.6))}
 .ig-tile:hover{border-color:rgba(114,230,62,.5);transform:translateY(-4px)}
 /* real @gym_grindz_fit media keeps its colour — only the stock placeholders are
    pushed to near-monochrome, so authentic content reads as the real thing */
-.ig-tile .ig-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.05) brightness(.88);transition:transform .5s var(--ease-out),filter .3s}
-.ig-tile:hover .ig-img{transform:scale(1.06);filter:grayscale(0) contrast(1.03) brightness(1)}
+.ig-tile .ig-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease-out)}
+.ig-tile:hover .ig-img{transform:scale(1.06)}
 
 /* small reel marker in the corner — no play overlay, nothing to click through */
 .ig-reel,.pf-reel{
@@ -456,8 +457,8 @@ a.photo-frame.is-proof:hover .pf-img{filter:none}
 .pf-reel{top:14px;right:14px;width:24px;height:24px}
 .ig-reel svg,.pf-reel svg{width:100%;height:100%;fill:none;stroke:#fff;stroke-width:1.6;stroke-linejoin:round}
 /* featured reel frames in the two training sections */
-a.photo-frame .pf-img{filter:grayscale(.15) contrast(1.04) brightness(.92);transition:transform .5s var(--ease-out),filter .3s}
-a.photo-frame:hover .pf-img{transform:scale(1.035);filter:grayscale(0) contrast(1.02) brightness(1)}
+a.photo-frame .pf-img{transition:transform .5s var(--ease-out)}
+a.photo-frame:hover .pf-img{transform:scale(1.035)}
 a.photo-frame:hover{border-color:rgba(114,230,62,.5)}
 .track-media .mono a{color:var(--volt);text-decoration:underline;text-underline-offset:3px}
 .track-media .mono a:hover{color:var(--chalk)}
@@ -531,8 +532,8 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
   .pkg-grid{grid-template-columns:1fr;max-width:560px}
   .track-grid{grid-template-columns:1fr}
   .track-media{position:static;max-width:560px}
-  .about-grid{grid-template-columns:1fr}
   .about-media{grid-template-columns:1fr 1fr;max-width:100%}
+  .about-cols{grid-template-columns:repeat(2,1fr)}
   .contact-grid{grid-template-columns:1fr}
 }
 @media(max-width:1200px){
@@ -543,6 +544,7 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
   .pillars{grid-template-columns:1fr}
   .why-row{grid-template-columns:1fr}
   .about-media{grid-template-columns:1fr}
+  .about-cols{grid-template-columns:1fr}
   .receipts{grid-template-columns:1fr;max-width:420px}
   .ig-grid{grid-template-columns:repeat(2,1fr)}
   .f-row{grid-template-columns:1fr}
@@ -669,11 +671,11 @@ footer{background:var(--black);border-top:1px solid var(--steel-dk);padding:44px
     </div>
     <div class="about-grid">
       <div class="about-media reveal">
-        <a class="photo-frame is-graphic" style="aspect-ratio:760/766" href="https://www.instagram.com/p/DZnzkizRb3W/" target="_blank" rel="noopener" aria-label="Coach DJ’s profile card on Instagram — opens in a new tab">
+        <a class="photo-frame is-graphic" href="https://www.instagram.com/p/DZnzkizRb3W/" target="_blank" rel="noopener" aria-label="Coach DJ’s profile card on Instagram — opens in a new tab">
           <img class="pf-img" src="assets/ig/DZnzkizRb3W.jpg" width="760" height="766" alt="Coach DJ profile card listing his background, education and certifications" loading="lazy">
           <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
         </a>
-        <a class="photo-frame" style="aspect-ratio:4/5" href="https://www.instagram.com/p/DbmEcfLEWlh/?img_index=1" target="_blank" rel="noopener" aria-label="Track days on Instagram — opens in a new tab">
+        <a class="photo-frame" href="https://www.instagram.com/p/DbmEcfLEWlh/?img_index=1" target="_blank" rel="noopener" aria-label="Track days on Instagram — opens in a new tab">
           <span class="pf-tag">Track days</span>
           <img class="pf-img" src="assets/ig/DbmEcfLEWlh-about.jpg" width="560" height="700" alt="Sprinter carrying a relay baton down the track in a Kenyan Runners singlet" loading="lazy">
           <span class="pf-corner c1"></span><span class="pf-corner c2"></span><span class="pf-corner c3"></span><span class="pf-corner c4"></span>
